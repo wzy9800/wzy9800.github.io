@@ -428,16 +428,326 @@
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2022/09/17/hello-world/">
+            <a class="abstract-title" href="/2022/09/17/Java%E9%AB%98%E7%BA%A7%EF%BC%88%E5%85%AD%EF%BC%89/">
                 
-                <span class="abstract-title-text">Hello World</span>
+                <span class="abstract-title-text">[Untitled Post]</span>
             </a>
             <div class="abstract-content">
-                Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;
+                为什么要有泛型泛型的设计背景集合容器类在设计阶段&#x2F;声明阶段不能确定这个容器到底实际存的是什么类型的 对象，所以在JDK1.5之前只能把元素类型设计为Object，JDK1.5之后使用泛型来 解决。因为这个时候除了元素的类型不确定，其他的部分是确定的，例如关于 这个元素如何保存，如何管理等是确定的，因此此时把元素的类型设计成一个 参数，这个类型参数叫做泛型。Collection，List，ArrayList 这个就 是类型参数，即泛型。
+概念所谓泛型，就是允许在定义类、接口时通过一个标识表示类中某个属性的类 型或者是某个方法的返回值及参数类型。这个类型参数将在使用时（例如， 继承...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/09/17">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/17</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/09/17/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%BA%94%EF%BC%89/">
+                
+                <span class="abstract-title-text">[Untitled Post]</span>
+            </a>
+            <div class="abstract-content">
+                Java集合Java集合框架概述一方面， 面向对象语言对事物的体现都是以对象的形式，为了方便对多个对象的操作，就要对对象进行存储。另一方面，使用Array存储对象方面具有一些弊端，而Java集合就像一种容器，可以动态地把多个对象的引用放入容器中。
+1.集合、数组都是对多个数据进行存储操作的结构，简称Java容器
+​    说明：此时的存储，主要指的是内存层面的存储，不涉及到持久化的存储（.txt、.jpg、.avi、数据库中）
+2.1数组在存储多个数据方面的特点：
+​    &gt; 一旦初始化以后，其长度就确定了。
+​    &gt; 数组一旦定义好，其元素的类型也就确定了。我们也就只...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/09/17">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/17</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/09/17/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E5%9B%9B%EF%BC%89/">
+                
+                <span class="abstract-title-text">[Untitled Post]</span>
+            </a>
+            <div class="abstract-content">
+                枚举类的使用主要内容:
+​    如何自定义枚举类
+​    如何使用关键字enum定义枚举类
+​    Enum类的主要方法
+​    实现接口的枚举类
+使用1.枚举类的理解：类的对象只有有限个，确定的。
+2.当需要定义一组常量时，强烈建议使用枚举类
+举例
+​    星期：Monday(星期一)、……、Sunday(星期天)
+​    性别：Man(男)、Woman(女)
+3.如果枚举类中只有一个对象，则可以作为单例模式的实现方式
+定义方式一：JDK5.0之前，自定义枚举类
+12345678910111213141516171819202122232425262728293031323...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/09/17">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/17</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/09/17/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%B8%89%EF%BC%89/">
+                
+                <span class="abstract-title-text">[Untitled Post]</span>
+            </a>
+            <div class="abstract-content">
+                JDK8之前日期时间APIjava.lang.System类System类提供的public static long currentTimeMillis()用来返回当前时 间与1970年1月1日0时0分0秒之间以毫秒为单位的时间差。
+​    此方法适于计算时间差。
+java.util.Date类​        |—–java.sql.Date类
+​    java.util.Date类
+两个构造器的使用：
+​    Date（）：创建一个对应当前时间的Date对象
+​    创建指定毫秒数的Date对象
+两个方法的使用：
+​    toString():显示当前的年、月、日、时、分、...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/09/17">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/17</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/09/17/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%BA%8C%EF%BC%89/">
+                
+                <span class="abstract-title-text">[Untitled Post]</span>
+            </a>
+            <div class="abstract-content">
+                 String类：代表字符串。Java 程序中的所有字符串字面值（如 “abc” ）都作 为此类的实例实现。
+String是一个final类，代表不可变的字符序列。
+字符串是常量，用双引号引起来表示。它们的值在创建之后不能更改。
+String对象的字符内容是存储在一个字符数组value[]中的。
+1.String声明为final的，不可被继承。
+2.String实现了Serialzable接口：表示字符串是支持序列化的。
+​     实现了Compareble接口：表示String可以比较大小。
+3.String内部定义了final char[] value用于存储字符串数据
+4.Str...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/09/17">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/17</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/09/17/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%B8%80%EF%BC%89/">
+                
+                <span class="abstract-title-text">[Untitled Post]</span>
+            </a>
+            <div class="abstract-content">
+                IDEA的使用创建模块（Module）在Eclipse中又WorkSpace和Project，在IDEA中只有Project和Module，对应关系为
+​    Eclipse中的WorkSpace    对应    IDEA中的Project
+​    Eclipse中的Project        对应    IDEA中的Module
+相关配置设置主题
+编辑
+ 编辑
+这里默认提供了四套主题：IntelliJ，Darcula，Windows等。这里可以根据自己的喜好进行选择。
+设置窗体及菜单的字体及字体大小 (可忽略)编辑
+设置编辑区主题 (可忽略)编辑
+ 也可自行下载或通过插件更换主...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/09/17">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/17</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89/">
+                
+                <span class="abstract-title-text">[Untitled Post]</span>
+            </a>
+            <div class="abstract-content">
+                异常概述与异常体系结构在使用计算机语言进行项目开发的过程中，即使程序员把代码写得尽善尽美， 在系统的运行过程中仍然会遇到一些问题，因为很多问题不是靠代码能够避 免的，比如：客户输入数据的格式，读取文件是否存在，网络是否始终保持通畅等等。
+异常：在Java语言中，将程序执行中发生的不正常情况称为“异常” 。 (开发过程中的语法错误和逻辑错误不是异常)
+Java程序在执行过程中所发生的异常事件可分为两类
+​    Error：Java虚拟机无法解决的严重问题。如：JVM系统内部错误、资源耗尽等严重情况。比如：StackOverflowError和OOM。一般不编写针对性的代码进行处理。
+12...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/09/17">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/17</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89/">
+                
+                <span class="abstract-title-text">[Untitled Post]</span>
+            </a>
+            <div class="abstract-content">
+                抽象类与抽象方法（abstract关键字的使用）随着继承层次中一个个新子类的定义，类变得越来越具体，而父类则更一 般，更通用。类的设计应该保证父类和子类能够共享特征。有时将一个父 类设计得非常抽象，以至于它没有具体的实例，这样的类叫做抽象类。
+用abstract关键字来修饰一个类，这个类叫做抽象类。
+​    此类不能实例化
+​    抽象类中一定有构造器，便于子类实例化时调用（涉及：子类对象实例化的全过程）
+​    开发中，都会提供抽象类的子类，让子类对象实例化
+用abstract来修饰一个方法，该方法叫做抽象方法。
+​    抽象方法只有方法的声明，没有方法体。
+1public a...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/09/17">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/17</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89/">
+                
+                <span class="abstract-title-text">[Untitled Post]</span>
+            </a>
+            <div class="abstract-content">
+                关键字：static当我们编写一个类时，其实就是在描述其对象的属性和行为，而并没有产生实质上 的对象，只有通过new关键字才会产生出对象，这时系统才会分配内存空间给对象， 其方法才可以供外部调用。
+我们有时候希望无论是否产生了对象或无论产生了多少 对象的情况下，某些特定的数据在内存空间里只有一份，例如所有的中国人都有个 国家名称，每一个中国人都共享这个国家名称，不必在每一个中国人的实例对象中 都单独分配一个用于代表国家名称的变量。
+使用static修饰属性：静态变量
+使用范围：
+​    在Java类中，可用static修饰属性、方法、代码块、内部类
+被修饰后的成员具备以下特点：
+​  ...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/09/17">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/17</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89/">
+                
+                <span class="abstract-title-text">[Untitled Post]</span>
+            </a>
+            <div class="abstract-content">
+                向下转型有了对象的多态性以后，内存上实际上是加载了子类特有的属性和方法的，但是由于变量声明为父类类型，导致编译时，只能调用父类中声明的属性和方法，子类特有的属性和方法不能调用。
+如何才能调用子类特有的属性和方法？
+向下转型：使用强制类型转换符
+注：此处完整代码见JAVA基础（十）
+12Person p1 = new Man();Man m1 = (Man)p1;    
 
-More info: Writing
-Run server1$ hexo ...
+
+编辑
+ 使用强转时，可能出现ClassCastException的异常
+123Person p1 = new Man();Woman m1 = (Woman )p1;m1.goShoping();    //异常
+
+...
             </div>
             <!-- read more -->
             
@@ -453,6 +763,10 @@ Run server1$ hexo ...
         <div class="index-post-divider"></div>
     
     <!-- paginator  -->
+    
+        <nav class="page-nav">
+            <span class="page-number current">1</span><a class="page-number" href="/archives/2022/page/2/">2</a><a class="extend next" rel="next" href="/archives/2022/page/2/">NEXT &gt;</a>
+        </nav>
     
 </main>
 
@@ -553,14 +867,225 @@ Run server1$ hexo ...
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     
     
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 1
+        Total : 20
         </div>
         <!-- search  -->
         
@@ -577,7 +1102,175 @@ Run server1$ hexo ...
         
         <li class="archive-post-item">
             <span class="archive-post-date">09/17</span>
-            <a class="archive-post-title" href="/2022/09/17/hello-world/">Hello World</a>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%BA%8C%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%89%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%BA%94%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%83%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%8C%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%9B%9B%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/Java%E9%AB%98%E7%BA%A7%EF%BC%88%E5%85%AD%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%94%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/hello-world/">基础配置</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%85%AB%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%85%AD%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%B8%80%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%B8%89%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E5%9B%9B%EF%BC%89/">[Untitled Post]</a>
         </li>
     
     </div>

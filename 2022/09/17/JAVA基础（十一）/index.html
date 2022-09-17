@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="John Doe">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="John Doe">
+    
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="向下转型有了对象的多态性以后，内存上实际上是加载了子类特有的属性和方法的，但是由于变量声明为父类类型，导致编译时，只能调用父类中声明的属性和方法，子类特有的属性和方法不能调用。 如何才能调用子类特有的属性和方法？ 向下转型：使用强制类型转换符 注：此处完整代码见JAVA基础（十） 12Person p1 &#x3D; new Man();Man m1 &#x3D; (Man)p1;       编辑  使用强转时，可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="向下转型有了对象的多态性以后，内存上实际上是加载了子类特有的属性和方法的，但是由于变量声明为父类类型，导致编译时，只能调用父类中声明的属性和方法，子类特有的属性和方法不能调用。 如何才能调用子类特有的属性和方法？ 向下转型：使用强制类型转换符 注：此处完整代码见JAVA基础（十） 12Person p1 &#x3D; new Man();Man m1 &#x3D; (Man)p1;       编辑  使用强转时，可">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/25bcf955d1f644cc97d77a9c4c553f74.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a6db4eaaa6674e939b90b8d7ada0dc43.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9be3cd60e67c42d98d2382bb364c8ffa.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/bd597533479d4d0a9d69ece637affb5e.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a82164f5b31f45edb7643a06f55b1309.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0ea09f15687647e787fe54616f55fcb0.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2b464f2ad60748498e63cf78114a60bf.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/35080a0ae0794d0bb96b9452a2a8bd14.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/1bdadcb85c1a4cabbc401eaac45667a9.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/783cdb8522f049a8940a8922bbe67338.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d80b6b616c574e0eb4bc5f3a21b1780b.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/490984da9775424eb5225d32588ffc35.png">
+<meta property="article:published_time" content="2022-09-17T09:41:13.905Z">
+<meta property="article:modified_time" content="2022-09-17T09:41:13.906Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/25bcf955d1f644cc97d77a9c4c553f74.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/favicon.ico">
+    
+    <title>Alkaid&#39;s Studio</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20211217" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=20211217" as="style">
+    <link rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" href="/css/mobile.css?v=20211217" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=20211217" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=20211217" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <body class="post-body">
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu">
+        
+            
+                <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>Alkaid's Studio.</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">Alkaid&#39;s Studio.</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name"></a>
+            </div>
+        </div>
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden">
+        
+        
+            <div>&#xe639;</div>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+    height:50vh;
+
+">
+    
+    <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+                [Untitled Post]
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+                
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">4.8k</span>Reading time: <span class="post-count reading-time">23 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2022/09/17</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="向下转型"><a href="#向下转型" class="headerlink" title="向下转型"></a>向下转型</h1><p>有了对象的多态性以后，内存上实际上是加载了子类特有的属性和方法的，但是由于变量声明为父类类型，导致编译时，只能调用父类中声明的属性和方法，子类特有的属性和方法不能调用。</p>
+<p>如何才能调用子类特有的属性和方法？</p>
+<p>向下转型：使用强制类型转换符</p>
+<p>注：此处完整代码见JAVA基础（十）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">p1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Man</span>();</span><br><span class="line"><span class="type">Man</span> <span class="variable">m1</span> <span class="operator">=</span> (Man)p1;    </span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p><img src="https://img-blog.csdnimg.cn/25bcf955d1f644cc97d77a9c4c553f74.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p> 使用强转时，可能出现ClassCastException的异常</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Person p1 = new Man();</span><br><span class="line">Woman m1 = (Woman )p1;</span><br><span class="line">m1.goShoping();    //异常</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>因为内存中没有Woman的属性和方法</p>
+<h1 id="instanceof-操作符"><a href="#instanceof-操作符" class="headerlink" title="instanceof 操作符"></a>instanceof 操作符</h1><p>x instanceof A：检验x是否为类A的实例，返回值为boolean型</p>
+<p>​    要求x所属的类与类A必须是子类和父类的关系，否则编译错误。</p>
+<p>​    如果x属于类A的子类B，x instanceof A值也为true。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (p1 <span class="keyword">instanceof</span> Person) &#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;____Person____&quot;</span>);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (p1 <span class="keyword">instanceof</span> Object) &#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;____Object____&quot;</span>);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>为了避免在向下转型时出现异常，我们在向下转型前，先进行instanceof的判断，一旦返回true，就进行向下转型，否则就不执行向下转型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">      <span class="keyword">if</span> (p1 <span class="keyword">instanceof</span> Woman) &#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;____Woman____&quot;</span>);</span><br><span class="line">	<span class="type">Woman</span> <span class="variable">w2</span> <span class="operator">=</span> (Woman)p1;</span><br><span class="line">	w2.goShopping();</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (p1 <span class="keyword">instanceof</span> Man) &#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;____Man____&quot;</span>);</span><br><span class="line">	<span class="type">Man</span> <span class="variable">m2</span> <span class="operator">=</span> (Man)p1;</span><br><span class="line">	m2.earnMoney();</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>测试代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xxx.java;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PersonTest</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">		p.eat();</span><br><span class="line">		</span><br><span class="line">		<span class="type">Man</span> <span class="variable">m</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Man</span>();</span><br><span class="line">		m.eat();</span><br><span class="line">		m.age = <span class="number">25</span>;</span><br><span class="line">		m.earnMoney();</span><br><span class="line">		</span><br><span class="line">		System.out.println(<span class="string">&quot;*******************&quot;</span>);</span><br><span class="line">		<span class="comment">//多态性</span></span><br><span class="line">		<span class="type">Person</span> <span class="variable">p1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Man</span>();</span><br><span class="line">		</span><br><span class="line">		<span class="type">Person</span> <span class="variable">p2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Woman</span>();</span><br><span class="line">		</span><br><span class="line">		p1.eat();	<span class="comment">//执行子类重写的方法</span></span><br><span class="line">		p1.walk();</span><br><span class="line">		System.out.println(p1.id);		</span><br><span class="line">		<span class="comment">//p1.earnMoney();</span></span><br><span class="line">		System.out.println(<span class="string">&quot;**********************&quot;</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//Man m1 = (Man)p1;</span></span><br><span class="line">		<span class="comment">//m1.earnMoney();</span></span><br><span class="line">		<span class="comment">//m1.isSomking = true;</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//Woman w1 = (Woman)p1;</span></span><br><span class="line">		<span class="comment">//w1.goShopping();</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span> (p1 <span class="keyword">instanceof</span> Woman) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;____Woman____&quot;</span>);</span><br><span class="line">			<span class="type">Woman</span> <span class="variable">w2</span> <span class="operator">=</span> (Woman)p1;</span><br><span class="line">			w2.goShopping();</span><br><span class="line">		&#125; </span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span> (p1 <span class="keyword">instanceof</span> Man) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;____Man____&quot;</span>);</span><br><span class="line">			<span class="type">Man</span> <span class="variable">m2</span> <span class="operator">=</span> (Man)p1;</span><br><span class="line">			m2.earnMoney();</span><br><span class="line">		&#125; </span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span> (p1 <span class="keyword">instanceof</span> Person) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;____Person____&quot;</span>);</span><br><span class="line">		&#125; </span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span> (p1 <span class="keyword">instanceof</span> Object) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;____Object____&quot;</span>);</span><br><span class="line">		&#125; </span><br><span class="line">		</span><br><span class="line">		<span class="comment">//练习：编译通过，运行不通过：</span></span><br><span class="line">		<span class="comment">//Person p3 = new Person();</span></span><br><span class="line">		<span class="comment">//Man m3 = (Man)p3;</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//编译通过，运行通过</span></span><br><span class="line">		<span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Woman</span>();</span><br><span class="line">		<span class="type">Person</span> <span class="variable">p4</span> <span class="operator">=</span>(Person)obj;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//编译不通过</span></span><br><span class="line">		<span class="comment">//Man m5 = new Woman();</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>练习</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xxx.exer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FieldMethodTest</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">Sub</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Sub</span>();</span><br><span class="line">		System.out.println(s.count);	<span class="comment">//20</span></span><br><span class="line">		s.display();		<span class="comment">//20</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//多态性</span></span><br><span class="line">		<span class="type">Base</span> <span class="variable">b</span> <span class="operator">=</span> s;</span><br><span class="line">		System.out.println(b == s);		<span class="comment">//true</span></span><br><span class="line">		System.out.println(b.count);	<span class="comment">//10</span></span><br><span class="line">		<span class="comment">//虚拟方法调用</span></span><br><span class="line">		b.display();	<span class="comment">//20</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> &#123;</span><br><span class="line">	<span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">display</span><span class="params">()</span> &#123;</span><br><span class="line">		System.out.println(<span class="built_in">this</span>.count);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Sub</span> <span class="keyword">extends</span> <span class="title class_">Base</span> &#123;</span><br><span class="line">	<span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">display</span><span class="params">()</span> &#123;</span><br><span class="line">		System.out.println(<span class="built_in">this</span>.count);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>子类继承父类 </p>
+<p>​    若子类重写了父类方法，就意味着子类里定义的方法彻底覆盖了父类里的同名方法，系统将不可能把父类里的方法转移到子类中。       </p>
+<p>​    对于实例变量则不存在这样的现象，即使子类里定义了与父类完全相同的实例变量，这个实例变量依然不可能覆盖父类中定义的实例变量      </p>
+<p>练习2</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">protected</span> String name=<span class="string">&quot;person&quot;</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="type">int</span> age=<span class="number">50</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getInfo</span><span class="params">()</span> &#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="string">&quot;Name: &quot;</span>+ name + <span class="string">&quot;\n&quot;</span> +<span class="string">&quot;age: &quot;</span>+ age;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">extends</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">protected</span> String school=<span class="string">&quot;pku&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getInfo</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Name: &quot;</span>+ name + <span class="string">&quot;\nage: &quot;</span>+ age + <span class="string">&quot;\nschool: &quot;</span>+ school;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Graduate</span> <span class="keyword">extends</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String major=<span class="string">&quot;IT&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getInfo</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Name: &quot;</span>+ name + <span class="string">&quot;\nage: &quot;</span>+ age + <span class="string">&quot;\nschool: &quot;</span>+ </span><br><span class="line">                school+<span class="string">&quot;\nmajor:&quot;</span>+major;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>建立InstanceTest 类，在类中定义方法 method(Person e);</p>
+<p>在method中:</p>
+<p>​    (1)根据e的类型调用相应类的getInfo()方法。</p>
+<p>​    (2)根据e的类型执行：</p>
+<p>​        如果e为Person类的对象，输出： “a person”;</p>
+<p>​        如果e为Student类的对象，输出： “a student”</p>
+<p>​                                    “a person ”</p>
+<p>​         如果e为Graduate类的对象，输出： “a graduated student”</p>
+<p>​                                      “a student”</p>
+<p>​                                     “a person”</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xxx.exer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InstanceTest</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">InstanceTest</span> <span class="variable">test</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">InstanceTest</span>();</span><br><span class="line">		test.methed(<span class="keyword">new</span> <span class="title class_">Person</span>());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">methed</span><span class="params">(Person e)</span> &#123;</span><br><span class="line">		System.out.println(e.getInfo());</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (e <span class="keyword">instanceof</span> Graduate) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;“a graduated student”&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (e <span class="keyword">instanceof</span> Student) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;“a student”&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">&quot;“a person”&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>定义三个类，父类GeometricObject代表几何形状，子类Circle代表圆形，MyRectangle代表矩形。定义一个测试类GeometricTest，编写equalsArea方法测试两个对象的面积是否相等（注意方法的参 数类型，利用动态绑定技术），编写displayGeometricObject方法显示对象的面积（注意方法的参 数类型，利用动态绑定技术）。</p>
+<p><img src="https://img-blog.csdnimg.cn/a6db4eaaa6674e939b90b8d7ada0dc43.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xxx.exer1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GeometricObject</span> &#123;</span><br><span class="line">	<span class="keyword">protected</span> String color;</span><br><span class="line">	<span class="keyword">protected</span> <span class="type">double</span> weight;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">GeometricObject</span><span class="params">(String color, <span class="type">double</span> weight)</span> &#123;</span><br><span class="line">		<span class="built_in">super</span>();</span><br><span class="line">		<span class="built_in">this</span>.color = color;</span><br><span class="line">		<span class="built_in">this</span>.weight = weight;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">getColor</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> color;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setColor</span><span class="params">(String color)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.color = color;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getWeight</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> weight;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWeight</span><span class="params">(<span class="type">double</span> weight)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.weight = weight;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="type">double</span> <span class="title function_">findArea</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0.0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xxx.exer1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Circle</span> <span class="keyword">extends</span> <span class="title class_">GeometricObject</span> &#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">double</span> radius;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Circle</span><span class="params">(String color, <span class="type">double</span> weight, <span class="type">double</span> radius)</span> &#123;</span><br><span class="line">		<span class="built_in">super</span>(color, weight);</span><br><span class="line">		<span class="built_in">this</span>.radius = radius;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getRadius</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> radius;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setRadius</span><span class="params">(<span class="type">double</span> radius)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.radius = radius;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="type">double</span> <span class="title function_">findArea</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">3.14</span> * radius * radius;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xxx.exer1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyRectangle</span> <span class="keyword">extends</span> <span class="title class_">GeometricObject</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">double</span> width;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">double</span> height;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">MyRectangle</span><span class="params">(String color, <span class="type">double</span> weight, <span class="type">double</span> width, <span class="type">double</span> height)</span> &#123;</span><br><span class="line">		<span class="built_in">super</span>(color, weight);</span><br><span class="line">		<span class="built_in">this</span>.width = width;</span><br><span class="line">		<span class="built_in">this</span>.height = height;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getWidth</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> width;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWidth</span><span class="params">(<span class="type">double</span> width)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.width = width;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getHeight</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> height;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setHeight</span><span class="params">(<span class="type">double</span> height)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.height = height;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="type">double</span> <span class="title function_">findArea</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> width * height;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>测试</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">package com.xxx.exer1;</span><br><span class="line"></span><br><span class="line">public class GeometricTest &#123;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		GeometricTest test = new GeometricTest();</span><br><span class="line">		</span><br><span class="line">		Circle c1 = new Circle(&quot;white&quot;,1.0,2.3);</span><br><span class="line">		test.displayGeometricObject(c1);</span><br><span class="line">		</span><br><span class="line">		Circle c2 = new Circle(&quot;white&quot;,1.0,3.3);</span><br><span class="line">		test.displayGeometricObject(c2);</span><br><span class="line"></span><br><span class="line">		System.out.println(&quot;c1和c2的面积是否相等：&quot; + test.equalsArea(c1, c2));</span><br><span class="line">		</span><br><span class="line">		MyRectangle m1 = new MyRectangle(&quot;black&quot;,2.0,2.1,3.4);</span><br><span class="line">		test.displayGeometricObject(m1);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public boolean equalsArea(GeometricObject o1,GeometricObject o2) &#123;</span><br><span class="line">		return o1.findArea() == o2.findArea();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void displayGeometricObject(GeometricObject o) &#123;</span><br><span class="line">		System.out.println(&quot;面积为：&quot; + o.findArea());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>多态是编译时行为还是运行时行为？ 如何证明？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xxx.exer1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="comment">//面试题：多态是编译时行为还是运行时行为？</span></span><br><span class="line"><span class="comment">//证明如下：</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span>  &#123;</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;animal eat food&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span>  <span class="keyword">extends</span> <span class="title class_">Animal</span>  &#123;</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;cat eat fish&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span>  <span class="keyword">extends</span> <span class="title class_">Animal</span>  &#123;</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;Dog eat bone&quot;</span>);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Sheep</span>  <span class="keyword">extends</span> <span class="title class_">Animal</span>  &#123;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;Sheep eat grass&quot;</span>);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InterviewTest</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> Animal  <span class="title function_">getInstance</span><span class="params">(<span class="type">int</span> key)</span> &#123;</span><br><span class="line">		<span class="keyword">switch</span> (key) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Cat</span> ();</span><br><span class="line">		<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Dog</span> ();</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Sheep</span> ();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">key</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Random</span>().nextInt(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">		System.out.println(key);</span><br><span class="line"></span><br><span class="line">		<span class="type">Animal</span>  <span class="variable">animal</span> <span class="operator">=</span> getInstance(key);</span><br><span class="line">		</span><br><span class="line">		animal.eat();</span><br><span class="line">		 </span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>拓展问题：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xxx.exer1;</span><br><span class="line"><span class="comment">//考查多态的笔试题目：</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InterviewTest1</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">Base</span> <span class="variable">base</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Sub</span>();</span><br><span class="line">		base.add(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//		Sub s = (Sub)base;</span></span><br><span class="line"><span class="comment">//		s.add(1,2,3);</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span>... arr)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;base&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Sub</span> <span class="keyword">extends</span> <span class="title class_">Base</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;sub_1&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//	public void add(int a, int b, int c) &#123;</span></span><br><span class="line"><span class="comment">//		System.out.println(&quot;sub_2&quot;);</span></span><br><span class="line"><span class="comment">//	&#125;</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h1 id="Object类的使用"><a href="#Object类的使用" class="headerlink" title="Object类的使用"></a>Object类的使用</h1><p>Object类是所有Java类的根父类</p>
+<p>如果在类的声明中未使用extends关键字指明其父类，则默认父类 为java.lang.Object类</p>
+<p>无属性，只有一个空参构造器</p>
+<p>常用方法：equals () 、toString () 、getClass () 、hashCode () 、clone () 、finalize () 、wait () 、</p>
+<p>notify () 、notifyAll</p>
+<h1 id="x3D-x3D-操作符与equals方法"><a href="#x3D-x3D-操作符与equals方法" class="headerlink" title="&#x3D;&#x3D;操作符与equals方法"></a>&#x3D;&#x3D;操作符与equals方法</h1><h3 id="x3D-x3D-："><a href="#x3D-x3D-：" class="headerlink" title="&#x3D; &#x3D;："></a>&#x3D; &#x3D;：</h3><p>​    基本类型比较值:只要两个变量的值相等，即为true。</p>
+<p>​    引用类型比较引用(是否指向同一个对象)：只有指向同一个对象时，&#x3D;&#x3D;才返回true。</p>
+<p>用“&#x3D;&#x3D;”进行比较时，符号两边的数据类型必须兼容(可自动转换的基本数据类型除外)，否则会报错</p>
+<h3 id="equals-："><a href="#equals-：" class="headerlink" title="equals()："></a>equals()：</h3><p>​    所有类都继承了Object，也就获得了equals()方法。还可以重写。 </p>
+<p>​        只能比较引用类型，其作用与“&#x3D;&#x3D;”相同,比较是否指向同一个对象。</p>
+<p>​    源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object obj)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="built_in">this</span> == obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>​    特例：当用equals()方法进行比较时，对类File、String、Date及包装类 （Wrapper Class ）来说，是比较类型及内容而不考虑引用的是否是同一个对象           </p>
+<p>​    原因：在这些类中重写了Object类的equals()方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">      <span class="comment">//比较基本数据类型</span></span><br><span class="line"><span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line"><span class="type">double</span> <span class="variable">d</span> <span class="operator">=</span> <span class="number">10.0</span>;	</span><br><span class="line">System.out.println(i == j);	<span class="comment">//true</span></span><br><span class="line">System.out.println(i == d);	<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="variable">b</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line"><span class="comment">//System.out.println(i == b);	报错</span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> <span class="variable">c</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">System.out.println(i == c);	<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> <span class="variable">c1</span> <span class="operator">=</span> <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line"><span class="type">char</span> <span class="variable">c2</span> <span class="operator">=</span> <span class="number">65</span>;</span><br><span class="line">System.out.println(c1 == c2);</span><br><span class="line"></span><br><span class="line"><span class="comment">//比较引用数据类型</span></span><br><span class="line"><span class="type">Customer</span> <span class="variable">cust1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Customer</span>(<span class="string">&quot;Tom&quot;</span>,<span class="number">21</span>);</span><br><span class="line"><span class="type">Customer</span> <span class="variable">cust2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Customer</span>(<span class="string">&quot;Tom&quot;</span>,<span class="number">21</span>);</span><br><span class="line">System.out.println(cust1 == cust2);</span><br><span class="line"></span><br><span class="line"><span class="type">String</span> <span class="variable">str1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line"><span class="type">String</span> <span class="variable">str2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line">System.out.println(str1 == str2);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">&quot;*************************&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//equals的使用</span></span><br><span class="line">System.out.println(cust1.equals(cust2));</span><br><span class="line">System.out.println(str1.equals(str2)); <span class="comment">//String重写了</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h2 id="重写equals方法"><a href="#重写equals方法" class="headerlink" title="重写equals方法"></a>重写equals方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="comment">//比较两个对象的name和age是否相同</span></span><br><span class="line">	<span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object obj)</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">this</span> == obj) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (obj <span class="keyword">instanceof</span> Customer) &#123;</span><br><span class="line">			<span class="type">Customer</span> <span class="variable">cust</span> <span class="operator">=</span> (Customer) obj;</span><br><span class="line">			<span class="keyword">return</span> <span class="built_in">this</span>.age == cust.age &amp;&amp; <span class="built_in">this</span>.name.equals(cust);</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>也可以使用Eclipse提供的一键生成equals方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//自动生成的equals</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object obj)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">this</span> == obj)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">if</span> (obj == <span class="literal">null</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">if</span> (getClass() != obj.getClass())</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="type">Customer</span> <span class="variable">other</span> <span class="operator">=</span> (Customer) obj;</span><br><span class="line">	<span class="keyword">return</span> age == other.age &amp;&amp; Objects.equals(name, other.name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h2 id="重写equals-方法的原则"><a href="#重写equals-方法的原则" class="headerlink" title="重写equals()方法的原则"></a>重写equals()方法的原则</h2><p>对称性：如果x.equals(y)返回是“true” ，那么y.equals(x)也应该返回是 “true”。</p>
+<p>自反性：x.equals(x)必须返回是“true”。</p>
+<p>传递性：如果x.equals(y)返回是“true” ，而且y.equals(z)返回是“true” ， 那么z.equals(x)也应该返回是“true”。          </p>
+<p>一致性：如果x.equals(y)返回是“true” ，只要x和y内容一直不变，不管你 重复x.equals(y)多少次，返回都是“true”。        </p>
+<p>任何情况下，x.equals(null)，永远返回是“false” ；</p>
+<p>x.equals(和x不同类型的对象)永远返回是“false”。</p>
+<h2 id="x3D-x3D-和equals的区别"><a href="#x3D-x3D-和equals的区别" class="headerlink" title="&#x3D;&#x3D;和equals的区别"></a>&#x3D;&#x3D;和equals的区别</h2><p>&#x3D;&#x3D; 既可以比较基本类型也可以比较引用类型。对于基本类型就是比较值，对于引用类型 就是比较内存地址</p>
+<p>equals的话，它是属于java.lang.Object类里面的方法，如果该方法没有被重写过默认也 是</p>
+<p>&#x3D;&#x3D;;我们可以看到String等类的equals方法是被重写过的，而且String类在日常开发中 用的比较多，久而久之，形成了equals是比较值的错误观点。</p>
+<p>具体要看自定义类里有没有重写Object的equals方法来判断。</p>
+<p>通常情况下，重写equals方法，会比较类中的相应属性是否都相等。</p>
+<h1 id="toString-方法"><a href="#toString-方法" class="headerlink" title="toString() 方法"></a>toString() 方法</h1><p>toString()方法在Object类中定义，其返回值是String类型，返回类名和它的引用地址。</p>
+<p>当我们输出一个对象的引用时，实际上就是调用当前对象的toString（）</p>
+<p>​    因为print方法若输出一个对象会调用valueOf方法，而valueOf方法只要该对象不为空就调用toString方法       </p>
+<p>Object类中的源码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> getClass().getName() + <span class="string">&quot;@&quot;</span> + Integer.toHexString(hashCode());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>像String Date File 包装类 等 都重写了Object类的toString方法</p>
+<p>自定义类也可以重写toString方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;Customer[name = &quot;</span> + name + <span class="string">&quot; age = &quot;</span> + age + <span class="string">&quot;]&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>也可以自动生成：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;Customer [name=&quot;</span> + name + <span class="string">&quot;, age=&quot;</span> + age + <span class="string">&quot;]&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>测试 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Customer</span> <span class="variable">cust1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Customer</span>(<span class="string">&quot;Tom&quot;</span>,<span class="number">21</span>);</span><br><span class="line">System.out.println(cust1.toString());<span class="comment">//输出地址值</span></span><br><span class="line">System.out.println(cust1);	<span class="comment">//输出地址值</span></span><br><span class="line"></span><br><span class="line"><span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;MM&quot;</span>);</span><br><span class="line">System.out.println(str);	</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>练习</p>
+<p>定义两个类，父类GeometricObject代表几何形状，子类Circle代表圆形。</p>
+<p><img src="https://img-blog.csdnimg.cn/9be3cd60e67c42d98d2382bb364c8ffa.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p><img src="https://img-blog.csdnimg.cn/bd597533479d4d0a9d69ece637affb5e.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p> 写一个测试类，创建两个Circle对象，判断其颜色是否相等；利用equals方法判断其半径是否   相等；利用 toString()方法输出其半径。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xxx.exer3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GeometricObject</span> &#123;</span><br><span class="line">	<span class="keyword">protected</span> String color;</span><br><span class="line">	<span class="keyword">protected</span> <span class="type">double</span> weight;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">GeometricObject</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="built_in">super</span>();</span><br><span class="line">		<span class="built_in">this</span>.color = <span class="string">&quot;white&quot;</span>;</span><br><span class="line">		<span class="built_in">this</span>.weight = <span class="number">1.0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">GeometricObject</span><span class="params">(String color, <span class="type">double</span> weight)</span> &#123;</span><br><span class="line">		<span class="built_in">super</span>();</span><br><span class="line">		<span class="built_in">this</span>.color = color;</span><br><span class="line">		<span class="built_in">this</span>.weight = weight;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">getColor</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> color;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setColor</span><span class="params">(String color)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.color = color;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getWeight</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> weight;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWeight</span><span class="params">(<span class="type">double</span> weight)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.weight = weight;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xxx.exer3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Circle</span> <span class="keyword">extends</span> <span class="title class_">GeometricObject</span> &#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">double</span> radius;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Circle</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="built_in">super</span>();</span><br><span class="line">		radius = <span class="number">1.0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Circle</span><span class="params">(<span class="type">double</span> radius)</span> &#123;</span><br><span class="line">		<span class="built_in">super</span>();</span><br><span class="line">		<span class="built_in">this</span>.radius = radius;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Circle</span><span class="params">(<span class="type">double</span> radius,String color,<span class="type">double</span> weight)</span> &#123;</span><br><span class="line">		<span class="built_in">super</span>(color,weight);</span><br><span class="line">		<span class="built_in">this</span>.radius = radius;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getRadius</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> radius;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setRadius</span><span class="params">(<span class="type">double</span> radius)</span> &#123;</span><br><span class="line">		<span class="built_in">this</span>.radius = radius;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="type">double</span> <span class="title function_">findArea</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">3.14</span> * radius * radius;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object obj)</span> &#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">this</span> == obj) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(obj <span class="keyword">instanceof</span> Circle) &#123;</span><br><span class="line">			<span class="type">Circle</span> <span class="variable">c</span> <span class="operator">=</span> (Circle)obj;</span><br><span class="line">			<span class="keyword">return</span> <span class="built_in">this</span>.radius == c.radius;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;Circle [radius=&quot;</span> + radius + <span class="string">&quot;]&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xxx.exer3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CircleTest</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">Circle</span> <span class="variable">c1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Circle</span>(<span class="number">2.3</span>);</span><br><span class="line">		<span class="type">Circle</span> <span class="variable">c2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Circle</span>(<span class="number">2.3</span>, <span class="string">&quot;white&quot;</span>, <span class="number">2.0</span>);</span><br><span class="line">		</span><br><span class="line">		System.out.println(<span class="string">&quot;颜色是否相同：&quot;</span> + c1.getColor().equals(c2.getColor()));</span><br><span class="line">		</span><br><span class="line">		System.out.println(<span class="string">&quot;半径是否相同：&quot;</span> + c1.equals(c2));</span><br><span class="line">		</span><br><span class="line">		System.out.println(c1);	<span class="comment">//调用toString方法</span></span><br><span class="line">		System.out.println(c2.toString());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h1 id="单元测试（JUnit）"><a href="#单元测试（JUnit）" class="headerlink" title="单元测试（JUnit）"></a>单元测试（JUnit）</h1><p>使用方法：</p>
+<p>1、右键当前项目文件夹——Build Path——Add Libraries</p>
+<p><img src="https://img-blog.csdnimg.cn/a82164f5b31f45edb7643a06f55b1309.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p> 选择JUnit——Next</p>
+<p><img src="https://img-blog.csdnimg.cn/0ea09f15687647e787fe54616f55fcb0.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p> 选择JUnit4——Finish</p>
+<p><img src="https://img-blog.csdnimg.cn/2b464f2ad60748498e63cf78114a60bf.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p>2、创建一个Java类进行单元测试 </p>
+<p>要求：</p>
+<p>​    此时的Java类要求是Public的；</p>
+<p>​    此类提供Public的无参构造器</p>
+<p>3、此类中声明一个单元测试方法：</p>
+<p>要求：</p>
+<p>​    此方法权限是public的</p>
+<p>​    没有返回值</p>
+<p>​    没有形参</p>
+<p>4、此单元测试方法上需要声明注解：@Test，并导入相关java包：org.junit.Test</p>
+<p>5、声明号单元测试方法以后，就能在方法体内测试相关代码</p>
+<p>6、写完代码以后，左键双击方法名，右键run as JUnitTest</p>
+<p><img src="https://img-blog.csdnimg.cn/35080a0ae0794d0bb96b9452a2a8bd14.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p> 如果执行结果没有任何异常，为绿条</p>
+<p><img src="https://img-blog.csdnimg.cn/1bdadcb85c1a4cabbc401eaac45667a9.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p> 如果执行结果出现异常，红条</p>
+<p><img src="https://img-blog.csdnimg.cn/783cdb8522f049a8940a8922bbe67338.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p>测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xxx.java2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Date;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JUnitTest</span> &#123;</span><br><span class="line">	<span class="type">int</span> num;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">		num = <span class="number">20</span>;</span><br><span class="line">		System.out.println(<span class="string">&quot;show()&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testEquals</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;A&quot;</span>;</span><br><span class="line">		<span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="string">&quot;A&quot;</span>;</span><br><span class="line">		System.out.println(s1.equals(s2));</span><br><span class="line">		</span><br><span class="line">		<span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>();</span><br><span class="line">		<span class="type">Date</span> <span class="variable">date</span> <span class="operator">=</span> (Date)obj;</span><br><span class="line">		</span><br><span class="line">		System.out.println(num);</span><br><span class="line">		show();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testToString</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="string">&quot;A&quot;</span>;</span><br><span class="line">		System.out.println(s2.toString());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h1 id="包装类-Wrapper-的使用"><a href="#包装类-Wrapper-的使用" class="headerlink" title="包装类(Wrapper)的使用"></a>包装类(Wrapper)的使用</h1><p>针对八种基本数据类型定义相应的引用类型—包装类（封装类）</p>
+<p>有了类的特点，就可以调用类中的方法，Java才是真正的面向对象</p>
+<p><img src="https://img-blog.csdnimg.cn/d80b6b616c574e0eb4bc5f3a21b1780b.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<h3 id="基本数据类型包装成包装类的实例——装箱"><a href="#基本数据类型包装成包装类的实例——装箱" class="headerlink" title="基本数据类型包装成包装类的实例——装箱"></a>基本数据类型包装成包装类的实例——装箱</h3><p>通过包装类的构造器实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">500</span>; </span><br><span class="line"><span class="type">Integer</span> <span class="variable">t</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Integer</span>(i);</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p> 还可以通过字符串参数构造包装类对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Float</span> <span class="variable">f</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Float</span>(“<span class="number">4.56</span>”);</span><br><span class="line"><span class="type">Long</span> <span class="variable">l</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Long</span>(“asdf”); <span class="comment">//NumberFormatException</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h3 id="获得包装类对象中包装的基本类型变量-—拆箱"><a href="#获得包装类对象中包装的基本类型变量-—拆箱" class="headerlink" title="获得包装类对象中包装的基本类型变量 —拆箱"></a>获得包装类对象中包装的基本类型变量 —拆箱</h3><p>调用包装类的.xxxValue()方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">      <span class="type">Integer</span> <span class="variable">in1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="number">12</span>);</span><br><span class="line"><span class="type">int</span> <span class="variable">i1</span> <span class="operator">=</span> in1.intValue();</span><br><span class="line">System.out.println(i1 + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h3 id="JDK1-5之后，支持自动装箱，自动拆箱。但类型必须匹配。"><a href="#JDK1-5之后，支持自动装箱，自动拆箱。但类型必须匹配。" class="headerlink" title="JDK1.5之后，支持自动装箱，自动拆箱。但类型必须匹配。"></a>JDK1.5之后，支持自动装箱，自动拆箱。但类型必须匹配。</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">      <span class="comment">//自动装箱：</span></span><br><span class="line"><span class="type">int</span> <span class="variable">num2</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">in1</span> <span class="operator">=</span> num2;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">      <span class="comment">//自动拆箱</span></span><br><span class="line"><span class="type">int</span> <span class="variable">num3</span> <span class="operator">=</span> in1;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h3 id="包装类转换成字符串与基本数据类型转换成字符串"><a href="#包装类转换成字符串与基本数据类型转换成字符串" class="headerlink" title="包装类转换成字符串与基本数据类型转换成字符串"></a>包装类转换成字符串与基本数据类型转换成字符串</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">      <span class="type">float</span> <span class="variable">f1</span> <span class="operator">=</span> <span class="number">12.3f</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">str2</span> <span class="operator">=</span> String.valueOf(f1);</span><br><span class="line"></span><br><span class="line"><span class="type">Double</span> <span class="variable">d1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Double</span>(<span class="number">12.4</span>);</span><br><span class="line"><span class="type">String</span> <span class="variable">str3</span> <span class="operator">=</span> String.valueOf(d1);</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>除此之外基本数据类型还可以通过字符串拼接来转换</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">      <span class="type">int</span> <span class="variable">num1</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">str1</span> <span class="operator">=</span> num1 + <span class="string">&quot;&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h3 id="字符串转换成基本数据类型"><a href="#字符串转换成基本数据类型" class="headerlink" title="字符串转换成基本数据类型"></a>字符串转换成基本数据类型</h3><p>通过包装类的构造器实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;123&quot;</span></span><br><span class="line"><span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Integer</span>(str);</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>通过包装类的parseXxx(String s)静态方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">      <span class="type">String</span> <span class="variable">str2</span> <span class="operator">=</span> <span class="string">&quot;true&quot;</span>;</span><br><span class="line"><span class="type">boolean</span> <span class="variable">b1</span> <span class="operator">=</span> Boolean.parseBoolean(str2);</span><br><span class="line">System.out.println(b1);</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h3 id="相关代码"><a href="#相关代码" class="headerlink" title="相关代码"></a>相关代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xxx.java2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WrapperTest</span> &#123;</span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test1</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="comment">// 基本数据类型——&gt;包装类：</span></span><br><span class="line">		<span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">		<span class="type">Integer</span> <span class="variable">in1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Integer</span>(num); <span class="comment">// 传入int</span></span><br><span class="line">		System.out.println(in1.toString());</span><br><span class="line"></span><br><span class="line">		<span class="type">Integer</span> <span class="variable">in2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="string">&quot;123&quot;</span>); <span class="comment">// 传入String</span></span><br><span class="line">		System.out.println(in2.toString());</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 报异常</span></span><br><span class="line">		<span class="comment">// Integer in3 = new Integer(&quot;123abc&quot;); //不能传入非数字</span></span><br><span class="line">		<span class="comment">// System.out.println(in3.toString());</span></span><br><span class="line"></span><br><span class="line">		<span class="type">Float</span> <span class="variable">f1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Float</span>(<span class="number">12.3f</span>); <span class="comment">// 传入float</span></span><br><span class="line">		<span class="type">Float</span> <span class="variable">f2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Float</span>(<span class="number">12.3f</span>); <span class="comment">// 传入double</span></span><br><span class="line">		<span class="type">Float</span> <span class="variable">f3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Float</span>(<span class="string">&quot;12.3&quot;</span>); <span class="comment">// 传入String</span></span><br><span class="line">		System.out.println(f1);</span><br><span class="line">		System.out.println(f2);</span><br><span class="line">		System.out.println(f3);</span><br><span class="line"></span><br><span class="line">		<span class="type">Boolean</span> <span class="variable">b1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Boolean</span>(<span class="literal">true</span>);</span><br><span class="line">		<span class="type">Boolean</span> <span class="variable">b2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Boolean</span>(<span class="string">&quot;true&quot;</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 不会报错</span></span><br><span class="line">		<span class="type">Boolean</span> <span class="variable">b3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Boolean</span>(<span class="string">&quot;tRuE&quot;</span>);</span><br><span class="line">		<span class="type">Boolean</span> <span class="variable">b4</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Boolean</span>(<span class="string">&quot;true123&quot;</span>); <span class="comment">// 只有传入的字符串不是ture（忽略大小写都为false）</span></span><br><span class="line"></span><br><span class="line">		<span class="type">Order</span> <span class="variable">order</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Order</span>();</span><br><span class="line">		System.out.println(order.isMale); <span class="comment">// false</span></span><br><span class="line">		System.out.println(order.isFemale); <span class="comment">// null</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 包装类转换为基本数据类型</span></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="type">Integer</span> <span class="variable">in1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="number">12</span>);</span><br><span class="line">		<span class="type">int</span> <span class="variable">i1</span> <span class="operator">=</span> in1.intValue();</span><br><span class="line">		System.out.println(i1 + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">		<span class="type">Float</span> <span class="variable">f1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Float</span>(<span class="number">12.3</span>);</span><br><span class="line">		<span class="type">float</span> <span class="variable">f2</span> <span class="operator">=</span> f1.floatValue();</span><br><span class="line">		System.out.println(f2 + <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test3</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="comment">// 包装类的使用</span></span><br><span class="line">		<span class="type">int</span> <span class="variable">num1</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">		<span class="comment">// Integer in = new Integer(num1);</span></span><br><span class="line">		<span class="comment">// method(in);</span></span><br><span class="line">		<span class="comment">// JDK5.0新增自动装箱与拆箱</span></span><br><span class="line">		method(num1);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 自动装箱：</span></span><br><span class="line">		<span class="type">int</span> <span class="variable">num2</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">		<span class="type">Integer</span> <span class="variable">in1</span> <span class="operator">=</span> num2;</span><br><span class="line"></span><br><span class="line">		<span class="type">boolean</span> <span class="variable">b1</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">		<span class="type">Boolean</span> <span class="variable">b2</span> <span class="operator">=</span> b1;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 自动拆箱</span></span><br><span class="line">		System.out.println(in1.toString());</span><br><span class="line">		<span class="type">int</span> <span class="variable">num3</span> <span class="operator">=</span> in1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">(Object obj)</span> &#123;</span><br><span class="line">		System.out.println(obj);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test4</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="comment">// 基本数据类型、包装类——&gt;String类型</span></span><br><span class="line">		<span class="comment">// 方式1：</span></span><br><span class="line">		<span class="type">int</span> <span class="variable">num1</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">		<span class="type">String</span> <span class="variable">str1</span> <span class="operator">=</span> num1 + <span class="string">&quot;&quot;</span>;</span><br><span class="line">		<span class="comment">// 方式2：</span></span><br><span class="line">		<span class="type">float</span> <span class="variable">f1</span> <span class="operator">=</span> <span class="number">12.3f</span>;</span><br><span class="line">		<span class="type">String</span> <span class="variable">str2</span> <span class="operator">=</span> String.valueOf(f1);</span><br><span class="line"></span><br><span class="line">		<span class="type">Double</span> <span class="variable">d1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Double</span>(<span class="number">12.4</span>);</span><br><span class="line">		<span class="type">String</span> <span class="variable">str3</span> <span class="operator">=</span> String.valueOf(d1);</span><br><span class="line">		System.out.println(str2);</span><br><span class="line">		System.out.println(str3);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test5</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="comment">// String类型——&gt;基本数据类型、包装类</span></span><br><span class="line">		<span class="type">String</span> <span class="variable">str1</span> <span class="operator">=</span> <span class="string">&quot;123&quot;</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//错误情况</span></span><br><span class="line">		<span class="comment">//int num1 = (int)str1;</span></span><br><span class="line">		<span class="comment">//Integer in = (Integer)str1; </span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//调用包装类的parsexxx方法</span></span><br><span class="line">		<span class="type">int</span> <span class="variable">num2</span> <span class="operator">=</span> Integer.parseInt(str1);</span><br><span class="line">		System.out.println(num2 + <span class="number">1</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="type">String</span> <span class="variable">str2</span> <span class="operator">=</span> <span class="string">&quot;true&quot;</span>;</span><br><span class="line">		<span class="type">boolean</span> <span class="variable">b1</span> <span class="operator">=</span> Boolean.parseBoolean(str2);</span><br><span class="line">		System.out.println(b1);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Order</span> &#123;</span><br><span class="line">	<span class="type">boolean</span> isMale;</span><br><span class="line">	Boolean isFemale;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h2 id="总结：基本类型、包装类与String类间的转换"><a href="#总结：基本类型、包装类与String类间的转换" class="headerlink" title="总结：基本类型、包装类与String类间的转换"></a>总结：基本类型、包装类与String类间的转换</h2><p><img src="https://img-blog.csdnimg.cn/490984da9775424eb5225d32588ffc35.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<h3 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h3><p>1</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">      <span class="type">Object</span> <span class="variable">o1</span> <span class="operator">=</span> <span class="literal">true</span> ? <span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="number">1</span>) : <span class="keyword">new</span> <span class="title class_">Double</span>(<span class="number">2.0</span>);</span><br><span class="line">System.out.println(o1);    <span class="comment">//1.0</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>解析：</p>
+<p>​    三元运算符自动类型转换</p>
+<p>​    多态虚拟方法调用</p>
+<p>2</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">      Object o2;</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>)</span><br><span class="line">    o2 = <span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    o2 = <span class="keyword">new</span> <span class="title class_">Double</span>(<span class="number">2.0</span>);</span><br><span class="line">System.out.println(o2);    <span class="comment">//1</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>3</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">      <span class="type">Integer</span> <span class="variable">i</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="number">1</span>);</span><br><span class="line"><span class="type">Integer</span> <span class="variable">j</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="number">1</span>);</span><br><span class="line">System.out.println(i == j);<span class="comment">//false</span></span><br><span class="line"></span><br><span class="line"><span class="type">Integer</span> <span class="variable">m</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">n</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">System.out.println(m == n);<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="type">Integer</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">128</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">y</span> <span class="operator">=</span> <span class="number">128</span>;</span><br><span class="line">System.out.println(x == y);<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>解析：</p>
+<p>​    -128到127为常用数，在Integer内定义了一个IntegerCathe，里面定义了一个Intefer[ ]，保存了这个范围的整数，如有需要使用该数组的元素,不需要new，提高了效率，所以m &#x3D;&#x3D; n       </p>
+<p>​    而128不在这个范围，需要在new一个新的对象，地址不同自然返回false</p>
+<p>练习：</p>
+<p>利用Vector代替数组处理：从键盘读入学生成绩（以负数代表输入结束），找出 最高分，并输出学生成绩等级。</p>
+<p>​    提示：数组一旦创建，长度就固定不变，所以在创建数组前就需要知道它的长度。而向量类java.util.Vector可以根据需要动态伸缩。             </p>
+<p>​    创建Vector对象：Vector v&#x3D;new Vector();</p>
+<p>​    给向量添加元素：v.addElement(Object obj); &#x2F;&#x2F;obj必须是对象</p>
+<p>​    取出向量中的元素：Object obj&#x3D;v.elementAt(0);</p>
+<p>​        注意第一个元素的下标是0，返回值是Object类型的。</p>
+<p>​    计算向量的长度：v.size();</p>
+<p>​    若与最高分相差10分内：A等；20分内：B等； 30分内：C等；其它：D等</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xxx.exer4;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">import</span> java.util.Vector;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ScoreTest</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">Scanner</span> <span class="variable">scan</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">		<span class="type">Vector</span> <span class="variable">v</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Vector</span>();</span><br><span class="line">		<span class="type">int</span> <span class="variable">maxScore</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (;;) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;请输入学生成绩（以负数代表输入结束）&quot;</span>);</span><br><span class="line">			<span class="type">int</span> <span class="variable">score</span> <span class="operator">=</span> scan.nextInt();</span><br><span class="line">			<span class="keyword">if</span> (score &lt; <span class="number">0</span>) &#123;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (score &gt; <span class="number">100</span>) &#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;输入的数据非法,请重新输入&quot;</span>);</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			v.addElement(score);</span><br><span class="line">			<span class="keyword">if</span> (maxScore &lt; score) &#123;</span><br><span class="line">				maxScore = score;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="type">char</span> level;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; v.size(); i++) &#123;</span><br><span class="line">			<span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> v.elementAt(i);</span><br><span class="line">			</span><br><span class="line">			<span class="type">int</span> <span class="variable">score</span> <span class="operator">=</span> (<span class="type">int</span>)obj;</span><br><span class="line">			<span class="keyword">if</span> (maxScore - score &lt;= <span class="number">10</span>) &#123;</span><br><span class="line">				level = <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span>(maxScore - score &lt;= <span class="number">20</span>)&#123;</span><br><span class="line">				level = <span class="string">&#x27;B&#x27;</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(maxScore - score &lt;= <span class="number">30</span>)&#123;</span><br><span class="line">				level = <span class="string">&#x27;C&#x27;</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				level = <span class="string">&#x27;D&#x27;</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			System.out.println(<span class="string">&quot;student——&quot;</span> + i + <span class="string">&quot;,score is &quot;</span> + score + <span class="string">&quot;,level is &quot;</span> + level);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+
+    </article>
+    <!-- license -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="http://example.com">John Doe</a>
+            <p>Link：<a href="http://example.com/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89/">http://example.com/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89/</a>
+            <p>Publish date：<a href="http://example.com/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89/">September 17th 2022, 5:41:13 pm</a>
+            <p>Update date：<a href="http://example.com/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89/">September 17th 2022, 5:41:13 pm</a>
+            <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89/" title="">
+                    <div class="nextTitle">[Untitled Post]</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%EF%BC%89/" title="">
+                    <div class="prevTitle">[Untitled Post]</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+            
+                <a href="mailto:980010387@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/wzy9800" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+            
+        </div>
+    	
+</footer>
+
+        </div>
+        <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%91%E4%B8%8B%E8%BD%AC%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">向下转型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#instanceof-%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">2.</span> <span class="toc-text">instanceof 操作符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Object%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">Object类的使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#x3D-x3D-%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8Eequals%E6%96%B9%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">&#x3D;&#x3D;操作符与equals方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#x3D-x3D-%EF%BC%9A"><span class="toc-number">4.0.1.</span> <span class="toc-text">&#x3D; &#x3D;：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#equals-%EF%BC%9A"><span class="toc-number">4.0.2.</span> <span class="toc-text">equals()：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E5%86%99equals%E6%96%B9%E6%B3%95"><span class="toc-number">4.1.</span> <span class="toc-text">重写equals方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E5%86%99equals-%E6%96%B9%E6%B3%95%E7%9A%84%E5%8E%9F%E5%88%99"><span class="toc-number">4.2.</span> <span class="toc-text">重写equals()方法的原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#x3D-x3D-%E5%92%8Cequals%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">4.3.</span> <span class="toc-text">&#x3D;&#x3D;和equals的区别</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#toString-%E6%96%B9%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text">toString() 方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%EF%BC%88JUnit%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">单元测试（JUnit）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8C%85%E8%A3%85%E7%B1%BB-Wrapper-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">7.</span> <span class="toc-text">包装类(Wrapper)的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8C%85%E8%A3%85%E6%88%90%E5%8C%85%E8%A3%85%E7%B1%BB%E7%9A%84%E5%AE%9E%E4%BE%8B%E2%80%94%E2%80%94%E8%A3%85%E7%AE%B1"><span class="toc-number">7.0.1.</span> <span class="toc-text">基本数据类型包装成包装类的实例——装箱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%BE%97%E5%8C%85%E8%A3%85%E7%B1%BB%E5%AF%B9%E8%B1%A1%E4%B8%AD%E5%8C%85%E8%A3%85%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%8F%98%E9%87%8F-%E2%80%94%E6%8B%86%E7%AE%B1"><span class="toc-number">7.0.2.</span> <span class="toc-text">获得包装类对象中包装的基本类型变量 —拆箱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JDK1-5%E4%B9%8B%E5%90%8E%EF%BC%8C%E6%94%AF%E6%8C%81%E8%87%AA%E5%8A%A8%E8%A3%85%E7%AE%B1%EF%BC%8C%E8%87%AA%E5%8A%A8%E6%8B%86%E7%AE%B1%E3%80%82%E4%BD%86%E7%B1%BB%E5%9E%8B%E5%BF%85%E9%A1%BB%E5%8C%B9%E9%85%8D%E3%80%82"><span class="toc-number">7.0.3.</span> <span class="toc-text">JDK1.5之后，支持自动装箱，自动拆箱。但类型必须匹配。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%85%E8%A3%85%E7%B1%BB%E8%BD%AC%E6%8D%A2%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">7.0.4.</span> <span class="toc-text">包装类转换成字符串与基本数据类型转换成字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E6%88%90%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">7.0.5.</span> <span class="toc-text">字符串转换成基本数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E4%BB%A3%E7%A0%81"><span class="toc-number">7.0.6.</span> <span class="toc-text">相关代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E3%80%81%E5%8C%85%E8%A3%85%E7%B1%BB%E4%B8%8EString%E7%B1%BB%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">7.1.</span> <span class="toc-text">总结：基本类型、包装类与String类间的转换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="toc-number">7.1.1.</span> <span class="toc-text">面试题</span></a></li></ol></li></ol></li></ol>
+            </div>
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 20
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%BA%8C%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%89%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%BA%94%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%83%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%8C%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%9B%9B%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/Java%E9%AB%98%E7%BA%A7%EF%BC%88%E5%85%AD%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%94%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/hello-world/">基础配置</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%85%AB%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%85%AD%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/17</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%B8%80%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%B8%89%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E5%9B%9B%EF%BC%89/">[Untitled Post]</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "http://example.com",
+        root: siteMetaRoot,
+        author: "John Doe"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v=20211217"></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v=20211217"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20211217" async></script>
+        
+        <!-- mermaid -->
+        
+    </body>
+</html>

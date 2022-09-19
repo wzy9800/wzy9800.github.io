@@ -443,6 +443,172 @@
             
         
         <article class="index-post">
+            <a class="abstract-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89/">
+                
+                <span class="abstract-title-text">JAVA基础（十二）</span>
+            </a>
+            <div class="abstract-content">
+                关键字：static当我们编写一个类时，其实就是在描述其对象的属性和行为，而并没有产生实质上 的对象，只有通过new关键字才会产生出对象，这时系统才会分配内存空间给对象， 其方法才可以供外部调用。
+我们有时候希望无论是否产生了对象或无论产生了多少 对象的情况下，某些特定的数据在内存空间里只有一份，例如所有的中国人都有个 国家名称，每一个中国人都共享这个国家名称，不必在每一个中国人的实例对象中 都单独分配一个用于代表国家名称的变量。
+使用static修饰属性：静态变量
+使用范围：
+​    在Java类中，可用static修饰属性、方法、代码块、内部类
+被修饰后的成员具备以下特点：
+​  ...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/09/17">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/17</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89/">
+                
+                <span class="abstract-title-text">JAVA基础（十一）</span>
+            </a>
+            <div class="abstract-content">
+                向下转型有了对象的多态性以后，内存上实际上是加载了子类特有的属性和方法的，但是由于变量声明为父类类型，导致编译时，只能调用父类中声明的属性和方法，子类特有的属性和方法不能调用。
+如何才能调用子类特有的属性和方法？
+向下转型：使用强制类型转换符
+注：此处完整代码见JAVA基础（十）
+12Person p1 = new Man();Man m1 = (Man)p1;    
+
+
+编辑
+ 使用强转时，可能出现ClassCastException的异常
+123Person p1 = new Man();Woman m1 = (Woman )p1;m1.goShoping();    //异常
+
+...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/09/17">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/17</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%EF%BC%89/">
+                
+                <span class="abstract-title-text">JAVA基础（十）</span>
+            </a>
+            <div class="abstract-content">
+                练习
+\2. (1)定义一个ManKind类，包括
+​    成员变量int sex和int salary；
+​    方法void manOrWoman()：根据sex的值显示“man”(sex&#x3D;&#x3D;1)或者“woman”(sex&#x3D;&#x3D;0)；
+​    方法void employeed()：根据salary的值显示“no job”(salary&#x3D;&#x3D;0)或者“ job”(salary!&#x3D;0)。
+​     (2)定义类Kids继承ManKind，并包括
+​         成员变量int yearsOld；
+​      ...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/09/17">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/17</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B9%9D%EF%BC%89/">
+                
+                <span class="abstract-title-text">JAVA基础（九）</span>
+            </a>
+            <div class="abstract-content">
+                常用快捷键
+ Eclipse中的快捷键：     1.补全代码的声明：alt + &#x2F;     2.快速修复: ctrl + 1     3.批量导包：ctrl + shift + o     4.使用单行注释：ctrl + &#x2F;     5.使用多行注释： ctrl + shift + &#x2F;     6.取消多行注释：ctrl + shift +      7.复制指定行的代码：ctrl + alt + down 或 ctrl + alt + up     8.删除指定行的代码：ctrl + d     9.上下移动代码：alt + up  或 alt + do...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/09/17">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/17</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%85%AB%EF%BC%89/">
+                
+                <span class="abstract-title-text">JAVA基础（八）</span>
+            </a>
+            <div class="abstract-content">
+                面向对象特征之一：封装和隐藏我们程序设计追求“高内聚，低耦合”
+​    高内聚 ：类的内部数据操作细节自己完成，不允许外部干涉；
+​    低耦合 ：仅对外暴露少量的方法用于使用。
+隐藏对象内部的复杂性，只对外公开简单的接口。便于外界调用，从而提高系统的可扩展性、可维护性。通俗的说，把该隐藏的隐藏起来，该暴露 的暴露出来。这就是封装性的设计思想。
+信息的封装和隐藏Java中通过将数据声明为私有的(private)，再提供公共的（public） 方法:getXxx()和setXxx()实现对该属性的操作，以实现下述目的：
+​    隐藏一个类中不需要对外提供的实现细节；
+​    使用者...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/09/17">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/17</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
             <a class="abstract-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%83%EF%BC%89/">
                 
                 <span class="abstract-title-text">JAVA基础（七）</span>
@@ -452,6 +618,38 @@
 特征：匿名对象只能调用一次
 使用：
 12345678910111213141516171819202122232425262728293031323334353637383940package com.xxx.java;public class PhoneTest &#123;	public static void main(String[] args) &#123;//		匿名对象		new Phone().sendEmail();		new Phone().playgame();				new Phone().pric...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2022/09/17">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/17</span>
+                </div>
+                <!-- tags -->
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%85%AD%EF%BC%89/">
+                
+                <span class="abstract-title-text">JAVA基础（六）</span>
+            </a>
+            <div class="abstract-content">
+                面向对象JAVA类及类的成员：属性、方法、构造器；代码块、内部类
+面向对象三大特征：封装性、继承性、多态性、（抽象性）
+其他关键字：this、super、static、final、abstract、interface、package、import
+面向过程与面向对象二者都是一种思想，面向对象是相对于面向过程而言的。面向过程，强调的是功能行为，以函数为最小单位，考虑怎么做。面向对象，将功能封装进对象，强调了具备了功能的对象，以类&#x2F;对象为最小单位，考虑谁来做。
+面向对象更加强调运用人类在日常的思维逻辑中采用的思想方法与原则，如 抽象、分类、继承、聚合、多态等。
+面向对象的三大特性：...
             </div>
             <!-- read more -->
             
@@ -581,112 +779,10 @@ yanghui[i][j] &#x3D; yanghui[i-1][j] + yanghui[i-1][j-1]
         </article>
         <div class="index-post-divider"></div>
     
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89/">
-                
-                <span class="abstract-title-text">JAVA基础（一）</span>
-            </a>
-            <div class="abstract-content">
-                JAVA知识图谱
-Java语言运行机制及运行过程Java语言的特点：跨平台性
-
-因为有了JVM，同一个Java程序在三个不同的操作系统中都可以执行。这样就实现了Java程序的跨平台性
-Java版本
-JDK与J2SE的区别 JAVA就是指JDK开发工具，所以我们可以理解为JAVA等价于JDK。JAVA有3个版本：J2SE J2EE J2ME，而J2SE桌面级应用，J2ME移动端应用，J2EE企业级应用
-Java两种核心机制Java虚拟机（JVM）​        JVM是一个虚拟的计算机，具有指令集并使用不同的存储区域。负责执行指令，管理数 据、内存、寄存器。         
-​    ...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/09/17">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/17</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%8C%EF%BC%89/">
-                
-                <span class="abstract-title-text">JAVA基础（二）</span>
-            </a>
-            <div class="abstract-content">
-                运算符运算符是一种特殊的符合，用以表示数据的运算，赋值和比较等。
-​    算术运算符
-​    赋值运算符
-​    比较运算符（关系运算符）
-​    逻辑运算符
-​    位运算符
-​    三元运算符
-算术运算符
-除法123456789101112131415161718class AriTest &#123;	public static void main(String[] args)&#123;		int num1 = 12;		int num2 = 5;		int result1 = num1 / num2;		System.out.println(result1);	//...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/09/17">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/17</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/17/hello-world/">
-                
-                <span class="abstract-title-text">基础配置</span>
-            </a>
-            <div class="abstract-content">
-                Run server1$ hexo s
-
-Generate static files1$ hexo g
-
-Deploy to remote sites1$ hexo d
-
-
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/09/17">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/17</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
     <!-- paginator  -->
     
         <nav class="page-nav">
-            <a class="extend prev" rel="prev" href="/">&lt; PREV</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+            <a class="extend prev" rel="prev" href="/">&lt; PREV</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">NEXT &gt;</a>
         </nav>
     
 </main>
@@ -719,6 +815,13 @@ Deploy to remote sites1$ hexo d
     
         
     
+        
+            
+                <span class="iconfont-archer qq" title=qq>
+                    
+                    <img class="profile-qr" src="/assets/qq.png" />
+                </span>
+            
         
     
         
@@ -792,6 +895,13 @@ Deploy to remote sites1$ hexo d
     
         
     
+        
+            
+                <span class="iconfont-archer qq" title=qq>
+                    
+                    <img class="profile-qr" src="/assets/qq.png" />
+                </span>
+            
         
     
         
@@ -946,7 +1056,85 @@ Deploy to remote sites1$ hexo d
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -1051,7 +1239,7 @@ Deploy to remote sites1$ hexo d
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 17
+        Total : 23
         </div>
         <!-- search  -->
         
@@ -1174,6 +1362,96 @@ Deploy to remote sites1$ hexo d
         <li class="archive-post-item">
             <span class="archive-post-date">Invalid date</span>
             <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%85%AB%EF%BC%89/">JAVA基础（八）</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%85%AD%EF%BC%89/">JAVA基础（六）</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%E5%B0%8F%E7%BB%93%EF%BC%88%E9%A1%B9%E7%9B%AE%E4%B8%89%EF%BC%89/">JAVA基础小结（项目三）</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89/">JAVA基础（十一）</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%B8%89%EF%BC%89/">JAVA高级（三）</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/17/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E5%9B%9B%EF%BC%89/">JAVA高级（四）</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/19/Java%E9%AB%98%E7%BA%A7%EF%BC%88%E4%B8%83%EF%BC%89/">Java高级（七）</a>
         </li>
     
     </div>

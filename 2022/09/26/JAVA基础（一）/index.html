@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Alkaid">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Alkaid">
+    
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="JAVA知识图谱 Java语言运行机制及运行过程Java语言的特点：跨平台性  因为有了JVM，同一个Java程序在三个不同的操作系统中都可以执行。这样就实现了Java程序的跨平台性 Java版本 JDK与J2SE的区别 JAVA就是指JDK开发工具，所以我们可以理解为JAVA等价于JDK。JAVA有3个版本：J2SE J2EE J2ME，而J2SE桌面级应用，J2ME移动端应用，J2EE企业级应">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA基础（一）">
+<meta property="og:url" content="http://example.com/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="JAVA知识图谱 Java语言运行机制及运行过程Java语言的特点：跨平台性  因为有了JVM，同一个Java程序在三个不同的操作系统中都可以执行。这样就实现了Java程序的跨平台性 Java版本 JDK与J2SE的区别 JAVA就是指JDK开发工具，所以我们可以理解为JAVA等价于JDK。JAVA有3个版本：J2SE J2EE J2ME，而J2SE桌面级应用，J2ME移动端应用，J2EE企业级应">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/aaad08c708614db583f1d23eecdd3aef.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/73f75fe862894521b63ae47c0be49f7d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0bc9c26606064ebd941c1cd8fe75c54d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/7532c2c81fe54ba9bfc7b1a15d2e9db2.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8b987c16d2b9420cac090bed40c0ee60.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/5e9e80471f824d4d84d16175efb36388.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/b1cf863264344f9cb4bf4656d2e91b4b.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f729e744e0924fbe9ccb981f70930730.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e1abf3e5458c4b84add3ba3dff34aa82.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d8371986b1c447bf8bd0d7179c80f45f.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/91a1fd8d834d4694a4161161a9280c7f.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3a873343f9924e84b127c2038e3cc422.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/4f08e94121344a8da24f022544672213.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2ad737f635314c0bad5b0cc5b6e4e14c.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8a1ab7cfce6f48d1868036b74ce4e9a4.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/5b83b248f31f4026894b8b66e7a2d3ce.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/b687de87ef2b48e68dfdccb526aca117.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2737ef333c624d99af541f2975c303e6.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c71a81295ed5432db91f5232a47d821d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/b65e3d176ccd4181a9b4046dce8ec968.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a8a2e2bcaa60469bab4b8bf4cd631063.png">
+<meta property="article:published_time" content="2022-09-26T13:47:35.583Z">
+<meta property="article:modified_time" content="2022-09-23T17:53:55.505Z">
+<meta property="article:author" content="Alkaid">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/aaad08c708614db583f1d23eecdd3aef.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/favicon.ico">
+    
+    <title>JAVA基础（一） · Alkaid&#39;s Studio</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20211217" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=20211217" as="style">
+    <link rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" href="/css/mobile.css?v=20211217" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=20211217" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=20211217" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <body class="post-body">
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu">
+        
+            
+                <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>Alkaid's Studio.</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">Alkaid&#39;s Studio.</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">JAVA基础（一）</a>
+            </div>
+        </div>
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden">
+        
+        
+            <div>&#xe639;</div>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+    height:50vh;
+
+">
+    
+    <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+                JAVA基础（一）
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+                
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">4k</span>阅读时长: <span class="post-count reading-time">14 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2022/09/26</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="JAVA知识图谱"><a href="#JAVA知识图谱" class="headerlink" title="JAVA知识图谱"></a>JAVA知识图谱</h2><p><img src="https://img-blog.csdnimg.cn/aaad08c708614db583f1d23eecdd3aef.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h2 id="Java语言运行机制及运行过程"><a href="#Java语言运行机制及运行过程" class="headerlink" title="Java语言运行机制及运行过程"></a>Java语言运行机制及运行过程</h2><p>Java语言的特点：跨平台性</p>
+<p><img src="https://img-blog.csdnimg.cn/73f75fe862894521b63ae47c0be49f7d.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>因为有了JVM，同一个Java程序在三个不同的操作系统中都可以执行。这样就实现了Java程序的跨平台性</p>
+<h2 id="Java版本"><a href="#Java版本" class="headerlink" title="Java版本"></a>Java版本</h2><p><img src="https://img-blog.csdnimg.cn/0bc9c26606064ebd941c1cd8fe75c54d.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h2 id="JDK与J2SE的区别"><a href="#JDK与J2SE的区别" class="headerlink" title="JDK与J2SE的区别"></a>JDK与J2SE的区别</h2><p> JAVA就是指JDK开发工具，所以我们可以理解为JAVA等价于JDK。JAVA有3个版本：J2SE J2EE J2ME，而J2SE桌面级应用，J2ME移动端应用，J2EE企业级应用</p>
+<h1 id="Java两种核心机制"><a href="#Java两种核心机制" class="headerlink" title="Java两种核心机制"></a>Java两种核心机制</h1><h2 id="Java虚拟机（JVM）"><a href="#Java虚拟机（JVM）" class="headerlink" title="Java虚拟机（JVM）"></a>Java虚拟机（JVM）</h2><p>​        JVM是一个虚拟的计算机，具有指令集并使用不同的存储区域。负责执行指令，管理数 据、内存、寄存器。         </p>
+<p>​        对于不同的平台，有不同的虚拟机</p>
+<p>​        只有某平台提供了对应的java虚拟机，java程序才可在此平台运行</p>
+<p>​        Java虚拟机机制屏蔽了底层运行平台的差别，实现了“一次编译，到处运行”</p>
+<h2 id="垃圾收集机制"><a href="#垃圾收集机制" class="headerlink" title="垃圾收集机制"></a>垃圾收集机制</h2><p>​        不在使用的内存空间应回收——垃圾回收</p>
+<p>​        C&#x2F;C++等语言中，由程序员负责回收无用内存</p>
+<p>​        Java 语言消除了程序员回收无用内存空间的责任，它提供一种系统级线程跟踪存储空间的分配情况。并在JVM空闲时，检查并释放那些可被释放的存储空间          </p>
+<p>​        垃圾回收在Java程序运行过程在自动进行，程序员无法精确控制和干预</p>
+<p>​        Java程序还会出现内存泄漏和内存溢出问题吗？</p>
+<p>​        是的</p>
+<h1 id="JDK（Java-Development-Kit-Java开发工具包）"><a href="#JDK（Java-Development-Kit-Java开发工具包）" class="headerlink" title="JDK（Java Development Kit Java开发工具包）"></a>JDK（Java Development Kit Java开发工具包）</h1><p>JDK是提供给Java开发人员使用的，其中包含了java的开发工具，也包括了JRE。</p>
+<p>开发工具：编译工具（javac.exe）打包工具（jar.exe）等</p>
+<h2 id="JRE（Java-Runtime-Environment-Java运行环境）"><a href="#JRE（Java-Runtime-Environment-Java运行环境）" class="headerlink" title="JRE（Java Runtime Environment Java运行环境）"></a>JRE（Java Runtime Environment Java运行环境）</h2><p>包括Java虚拟机（JVM Java Virtual Machine）和Java程序所需的核心类库等，如果想要运行一个开发好的Java程序，计算机中只需要安装JRE即可 </p>
+<h2 id="JDK、JRE、JVM的关系"><a href="#JDK、JRE、JVM的关系" class="headerlink" title="JDK、JRE、JVM的关系"></a>JDK、JRE、JVM的关系</h2><p><img src="https://img-blog.csdnimg.cn/7532c2c81fe54ba9bfc7b1a15d2e9db2.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p> JDK &#x3D; JRE + 开发工具集（例如Javac编译工具等）</p>
+<p>JRE &#x3D; JVM + Java SE标准类库</p>
+<p><img src="https://img-blog.csdnimg.cn/8b987c16d2b9420cac090bed40c0ee60.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<h2 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a><img src="https://img-blog.csdnimg.cn/5e9e80471f824d4d84d16175efb36388.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</h2><p>报错解析</p>
+<p>​    错误: 找不到或无法加载主类 HelloWorld.class</p>
+<p>​    将java HelloWorld.class改为</p>
+<p>​      java HelloWorld</p>
+<p>若有多个类，则会生成多个字节码文件，但只能运行含有main方法的文件</p>
+<h1 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h1><p>用于注解说明解释程序的文字就是注释</p>
+<p>Java中注释的类型</p>
+<p>​    单行注释</p>
+<p>​    多行注释</p>
+<p>​    文档注释</p>
+<p>提高了代码的阅读性；测试程序的重要方法</p>
+<h3 id="单行注释"><a href="#单行注释" class="headerlink" title="单行注释"></a>单行注释</h3><p>&#x2F;&#x2F; xxxxxxxxxxxx</p>
+<p>多行注释</p>
+<p>&#x2F;* xxxxxxxxxxxxxxxxxx</p>
+<p>xxxxxxxxxxxxxxxxxxxx</p>
+<p>xxx*&#x2F;</p>
+<h3 id="文档注释"><a href="#文档注释" class="headerlink" title="文档注释"></a>文档注释</h3><p>文档注释：java独有，可被JDK提供的工具javadoc解析，生成一套以网页形式体现的该程序的说明文档。</p>
+<p>使用：&#x2F;**</p>
+<p>@author 指定java程序的作者</p>
+<p>@version 指定源文件的版本</p>
+<p>内容</p>
+<p>*&#x2F;</p>
+<p>注释内容可以被JDK提供的工具javadoc所解析，生成一套以网页文件形式体现的该程序的说明文档</p>
+<p>命令：</p>
+<p>javadoc -d 生成文件名 -author -version 解析文件名.java</p>
+<p><img src="https://img-blog.csdnimg.cn/b1cf863264344f9cb4bf4656d2e91b4b.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<h1 id="public"><a href="#public" class="headerlink" title="public"></a>public</h1><p>在一个java源文件中可以声明多个class。但是，最多有一个类声明为public，且该类名必须和文件名一致</p>
+<h1 id="main"><a href="#main" class="headerlink" title="main"></a>main</h1><p>程序的入口是main方法。格式是固定的</p>
+<p>public static void main (String[] args){</p>
+<p>}</p>
+<p>或</p>
+<p>public static void main (String[] a){</p>
+<p>}</p>
+<p>或</p>
+<p>public static void main (String a[]){</p>
+<p>}</p>
+<h2 id="输出语句"><a href="#输出语句" class="headerlink" title="输出语句"></a>输出语句</h2><p>System.out.print();    &#x2F;&#x2F;只输出不换行</p>
+<p>System.out.println();    &#x2F;&#x2F;先输出后换行</p>
+<h1 id="关键字与保留字"><a href="#关键字与保留字" class="headerlink" title="关键字与保留字"></a>关键字与保留字</h1><p>关键字的定义和特点</p>
+<p>定义：被Java语言赋予了特殊含义，用做专门用途的字符串</p>
+<p>特点：关键字中所有字母都为小写</p>
+<p><img src="https://img-blog.csdnimg.cn/f729e744e0924fbe9ccb981f70930730.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p> <img src="https://img-blog.csdnimg.cn/e1abf3e5458c4b84add3ba3dff34aa82.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<h2 id="保留字"><a href="#保留字" class="headerlink" title="保留字"></a>保留字</h2><p>Java保留字：现有Java版本尚未使用，但以后版本可能会作为关键字使用，自己命名标识符时要避免使用这些保留字</p>
+<p>goto、const</p>
+<h2 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h2><p>标识符：</p>
+<p>​    Java对各种变量、方法和类等要素命名时使用的字符序列称为标识符</p>
+<p>​    凡是自己可以起名字的地方都叫标识符</p>
+<h3 id="定义合法标识符规则"><a href="#定义合法标识符规则" class="headerlink" title="定义合法标识符规则"></a>定义合法标识符规则</h3><p>​    由26格英文字母大小写，0-9，或_或$组成</p>
+<p>​    不可以以数字作为开头</p>
+<p>​    不可以使用关键字和保留字，但能包含关键字和保留字。</p>
+<p>​    Java在严格区分大小写，长度无限制。_</p>
+<p>​    标识符不能包含空格</p>
+<h3 id="标识符命名规范"><a href="#标识符命名规范" class="headerlink" title="标识符命名规范"></a>标识符命名规范</h3><p>包名：多单词组成时所有单词都小写：xxxyyyzzz</p>
+<p>类名、接口名：多单词组成时，所有单词的首字母大小写：XxxYyyZzz</p>
+<p>变量名、方法名：多单词组成时，第一个单词首字母小写，第二个单词开始每个单词首字母大小xxxYyyZzz</p>
+<p>常量名：所有字母都大写，多单词时每个单词用下划线连接：XXX_YYY_ZZZ</p>
+<p>在起名字时，为了提高阅读性，要尽量有意义，“见名知意”</p>
+<p>java采用unicode字符集，因此标识符也可以使用汉字声明，但不推荐使用</p>
+<h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><h3 id="变量的概念"><a href="#变量的概念" class="headerlink" title="变量的概念"></a>变量的概念</h3><p>​    内存中的一个存储区域</p>
+<p>​    该区域的数据可以在同一类型范围内不断变化</p>
+<p>​    变量是程序中最基本的存储单元，包含变量类型、变量名和存储的值</p>
+<h3 id="变量的作用"><a href="#变量的作用" class="headerlink" title="变量的作用"></a>变量的作用</h3><p>​    用于在内存中保存数据</p>
+<h3 id="使用变量注意"><a href="#使用变量注意" class="headerlink" title="使用变量注意"></a>使用变量注意</h3><p>​    Java中每个变量必须先声明，后使用</p>
+<p>​    使用变量名来访问这块区域的数据</p>
+<p>​    变量的作用域：起定义所在的一对{}内</p>
+<p>​    变量只有在其作用域内才有效</p>
+<p>​    同一个作用域内，不能定义重名的变量</p>
+<p>​    java定义变量的格式：数据类型 变量名 &#x3D; 变量值；</p>
+<h2 id="变量的分类"><a href="#变量的分类" class="headerlink" title="变量的分类"></a>变量的分类</h2><h2 id="编辑-1"><a href="#编辑-1" class="headerlink" title="编辑"></a><img src="https://img-blog.csdnimg.cn/d8371986b1c447bf8bd0d7179c80f45f.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</h2><h2 id="编辑-2"><a href="#编辑-2" class="headerlink" title="编辑"></a><img src="https://img-blog.csdnimg.cn/91a1fd8d834d4694a4161161a9280c7f.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</h2><h2 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h2><p>整型类型：byte、short、int、long</p>
+<p>Java各整数类型有固定的表数范围和字段长度，不受OS的影响，以保证java程序的可移植性。</p>
+<p>java的整型常量默认为int型，<strong>声明long型常量须后加 ‘l’ 或 ‘L’</strong></p>
+<p>java程序中变量通常声明为int型，除非不足以表示较大的数，才使用long</p>
+<p><img src="https://img-blog.csdnimg.cn/3a873343f9924e84b127c2038e3cc422.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<h1 id="浮点型"><a href="#浮点型" class="headerlink" title="浮点型"></a>浮点型</h1><p>​                            浮点类型：float 、double</p>
+<p>​    与整数类型类似，Java浮点类型也有固定的表数范围和字段长度，不受具体操作系统的影响</p>
+<p>​    浮点型常量有两种表示形式：</p>
+<p>​        十进制形式：如 5.12    512.0f    .512(必须有小数点)</p>
+<p>​        科学计数法形式：如 5.12e2    512E2    100E-2</p>
+<p>​    float:单精度，尾数可以精确到7位有效数字。很多情况下，精度很难满足需求。</p>
+<p>​    double：双精度，精度是float的两倍。通常采用此类型</p>
+<p>​    <strong>Java的浮点型常量默认位double类型，声明float型常量，须后加 ‘f’ 或 ‘F’</strong></p>
+<p>​    <img src="https://img-blog.csdnimg.cn/4f08e94121344a8da24f022544672213.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<h1 id><a href="#" class="headerlink" title></a></h1><h1 id="字符型"><a href="#字符型" class="headerlink" title="字符型"></a>字符型</h1><p>​                                字符类型：char    </p>
+<p>char型数据用来表示通常意义上的“字符”（2字节）</p>
+<p>Java中所有字符都使用Unicode编码，故一个字符可以存储一个字母、汉字，或其他书面语的一个字符</p>
+<h3 id="字符串变量的三种表现形式："><a href="#字符串变量的三种表现形式：" class="headerlink" title="字符串变量的三种表现形式："></a>字符串变量的三种表现形式：</h3><p>​    字符串常量是用单引号（’’）括起来的单个字符。</p>
+<p>​    Java中还运行使用转义字符 ‘&#39;来将其后的字符转变为特殊字符型常量。</p>
+<p>​    直接使用Unicode 值来表示字符串常量：’\uXXXX’。其中，XXXX代表一个十六进制整数</p>
+<p>​    甚至可以这样</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> <span class="variable">c</span> <span class="operator">=</span> <span class="number">97</span>;</span><br><span class="line">System.out.println(c); <span class="comment">//97</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>char类型是可以进行运算的，因为它都对应有Unicode码。</p>
+<h1 id="了解：ASCII码"><a href="#了解：ASCII码" class="headerlink" title="了解：ASCII码"></a>了解：ASCII码</h1><p>​     • 在计算机内部，所有数据都使用二进制表示。每一个二进制位（bit）有 0 和 1 两种状态， 因此 8 个二进制位就可以组合出 256 种状态，这被称为一个字节（byte）。一个字节一 共可以用来表示 256 种不同的状态，每一个状态对应一个符号，就是 256 个符号，从 0000000 到11111111。</p>
+<p>​    • ASCII码：上个世纪60年代，美国制定了一套字符编码，对英语字符与二进制位之间的 关系，做了统一规定。这被称为ASCII码。ASCII码一共规定了128个字符的编码，比如空格“SPACE”是32（二进制00100000），大写的字母A是65（二进制01000001）。这 128个符号（包括32个不能打印出来的控制符号），只占用了一个字节的后面7位，最前面的1位统一规定为0。</p>
+<p>缺点：</p>
+<p>​    不能表示所有字符</p>
+<p>​    相同的编码表示的字符不一样。比如，130在法语编码中代表了é，在希伯来语编码中却代表 了字母Gime(ג)</p>
+<h2 id="了解：Unicode编码"><a href="#了解：Unicode编码" class="headerlink" title="了解：Unicode编码"></a>了解：Unicode编码</h2><p>​    • 乱码：世界上存在着多种编码方式，同一个二进制数字可以被解释成不同的符号。因此，要想打开一个文本文件，就必须知道它的编码方式，否则用错误的编码方式解读， 就会出现乱码。</p>
+<p>​    • Unicode：一种编码，将世界上所有的符号都纳入其中。每一个符号都给予一个独一 无二的编码，使用 Unicode 没有乱码的问题。</p>
+<p>​    • Unicode的缺点：Unicode 只规定了符号的二进制代码，却没有规定这个二进制代码 应该如何存储：无法区别 Unicode 和 ASCII：计算机无法区分三个字节表示一个符号 还是分别表示三个符号。另外，我们知道，英文字母只用一个字节表示就够了，如果 unicode统一规定，每个符号用三个或四个字节表示，那么每个英文字母前都必然有 二到三个字节是0，这对于存储空间来说是极大的浪费。</p>
+<h2 id="了解：UTF-8"><a href="#了解：UTF-8" class="headerlink" title="了解：UTF-8"></a>了解：UTF-8</h2><p> • UTF-8 是在互联网上使用最广的一种 Unicode 的实现方式。</p>
+<p> • UTF-8 是一种变长的编码方式。它可以使用 1-6 个字节表示一个符号，根据 不同的符号而变化字节长度。</p>
+<p> • UTF-8的编码规则：</p>
+<p>​    &gt; 对于单字节的UTF-8编码，该字节的最高位为0，其余7位用来对字符进行编码（等同            于 ASCII码）。</p>
+<p>​    &gt; 对于多字节的UTF-8编码，如果编码包含 n 个字节，那么第一个字节的前 n 位为1，第一         个字节的第 n+1 位为0，该字节的剩余各位用来对字符进行编码。在第一个字节之后的          所有的字节，都是最高两位为”10”，其余6位用来对字符进行编码。</p>
+<h1 id="布尔型"><a href="#布尔型" class="headerlink" title="布尔型"></a>布尔型</h1><p>boolean类型用来判断逻辑条件，一般用于流程控制：</p>
+<p>​    if条件语句</p>
+<p>​    while循环控制语句</p>
+<p>​    do-while循环控制语句</p>
+<p>​    for循环控制语句</p>
+<p>boolean类型数据值允许取值true和false，无null</p>
+<p>​    不可以使用0或非0的整数替代false和true</p>
+<p>​    Java虚拟机中没有任何供boolean值专用的字节码指令，Java语言表达所操作的boolean值，     在编译之后都使用java虚拟机中的int数据类型来代替：true用1表示，false用0表示</p>
+<h1 id="基本数据类型转换"><a href="#基本数据类型转换" class="headerlink" title="基本数据类型转换"></a>基本数据类型转换</h1><p>自动类型转换：容量小的类型自动转换位容量大的数据类型。数据类型按容量大小排序为：</p>
+<p><img src="https://img-blog.csdnimg.cn/2ad737f635314c0bad5b0cc5b6e4e14c.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p>有<strong>多种类型的数据混合运算</strong>时，系统首先自动将所有数据转换成容量最大    的那种数据类型，然后再进行计算。</p>
+<p><strong>byte，short，char之间不会相互转换，他们三者再计算时首先转换位int类型。</strong></p>
+<p>boolean不能与其他数据类型运算。</p>
+<p>当把任何数据类型的值和字符串进行连接运算（+），基本数据类型的值将自动转化位字符串类型。</p>
+<p>例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">        <span class="type">byte</span> <span class="variable">b1</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line">		<span class="type">int</span> <span class="variable">i1</span> <span class="operator">=</span> <span class="number">129</span>;</span><br><span class="line">		<span class="comment">//编译不通过</span></span><br><span class="line">		<span class="type">byte</span> <span class="variable">b2</span> <span class="operator">=</span> b1 + i1;	</span><br><span class="line"> </span><br><span class="line"><span class="comment">//错误: 不兼容的类型: 从int转换到byte可能会有损失</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h1 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h1><p>自动类型转换的逆过程，将容量大的数据类型转换位容量小的数据类型。使用时要加上强制转换符：（），但可能造成精度降低或溢出，格外要注意。</p>
+<p>通常，字符串不能直接转换位基本类型，但通过基本类型对应的包装类则可以实现把字符串转换成基本类型。</p>
+<p>boolean不可以转换位其他数据类型</p>
+<p>例：double转int</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">      <span class="type">double</span> <span class="variable">d1</span> <span class="operator">=</span> <span class="number">12.3</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">i1</span> <span class="operator">=</span> (<span class="type">int</span>)d1;    <span class="comment">//截断操作</span></span><br><span class="line">System.out.println(i1);</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>特殊情况：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">long l = 123123;    //long型变量没加l，视作int型，若超出int范围会报错</span><br><span class="line"></span><br><span class="line">System.out.println(l);</span><br><span class="line"></span><br><span class="line">//但float类型无法转换，会报错</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>易错案例 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">byte</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">12</span>;</span><br><span class="line"><span class="type">byte</span> <span class="variable">b1</span> <span class="operator">=</span> b + <span class="number">1</span>;</span><br><span class="line"><span class="comment">//编译失败，常量 1 为int型</span></span><br><span class="line"></span><br><span class="line"><span class="type">float</span> <span class="variable">f1</span> <span class="operator">=</span> b + <span class="number">12.3</span>; </span><br><span class="line"><span class="comment">//同理，常量 12.3 为double型</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//整型常量，默认类型为int型</span></span><br><span class="line"><span class="comment">//浮点型常量，默认类型为double型</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h1 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h1><p>字符串类型：String</p>
+<p>String不是基本数据类型，属于引用数据类型</p>
+<p>使用方法与基本数据类型一致。</p>
+<p>一个字符串可以串接另一个字符串，也可以直接串接其他类型的数据。</p>
+<p>注意：</p>
+<p>​    char型变量不可以为空，但String型可以</p>
+<p>​    String可以和8种数据类型做运算，且运算只能是连接运算：+，运算结果仍然是String类型</p>
+<p>​    String不能强制转换为整型</p>
+<p>连接运算</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">VariableTest3</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="type">int</span> <span class="variable">number</span> <span class="operator">=</span> <span class="number">1001</span>;</span><br><span class="line">		<span class="type">String</span> <span class="variable">numberStr</span> <span class="operator">=</span> <span class="string">&quot;学号：&quot;</span>;</span><br><span class="line">		<span class="type">String</span> <span class="variable">info</span> <span class="operator">=</span> numberStr + number;</span><br><span class="line">		</span><br><span class="line">		System.out.println(info);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p>例题：输出*    *（间隔一个tab键）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">VariableTest3</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;*	*&quot;</span>);		    <span class="comment">//正确</span></span><br><span class="line">		System.out.println(<span class="string">&#x27;*&#x27;</span> + <span class="string">&#x27;\t&#x27;</span> + <span class="string">&#x27;*&#x27;</span>);	<span class="comment">//93，char类型相加转化为ASCLL码对应的值 </span></span><br><span class="line">                                                <span class="comment">//进行相加</span></span><br><span class="line">		System.out.println(<span class="string">&#x27;*&#x27;</span> + <span class="string">&quot;\t&quot;</span> + <span class="string">&#x27;*&#x27;</span>);	<span class="comment">//正确，字符串&quot;\t&quot;同样能表示制表符</span></span><br><span class="line">		System.out.println(<span class="string">&#x27;*&#x27;</span> + <span class="string">&#x27;\t&#x27;</span> + <span class="string">&quot;*&quot;</span>);	<span class="comment">//51*，char类型相加转化为ASCLL码对应的 </span></span><br><span class="line">                                                <span class="comment">//值进行相加</span></span><br><span class="line">		System.out.println(<span class="string">&#x27;*&#x27;</span> + (<span class="string">&#x27;\t&#x27;</span> + <span class="string">&quot;*&quot;</span>));	<span class="comment">//正确</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<h1 id="进制"><a href="#进制" class="headerlink" title="进制"></a>进制</h1><p>所有数字再计算机底层都以二进制形式存在</p>
+<p>对于整数，有四种表示方式：</p>
+<p>​    二进制（binary）：0，1，满2进1，以<strong>0b或0B开头</strong>。</p>
+<p>​    十进制（decimal）：0-9，满10进1。</p>
+<p>​    八进制（octal）：0-7，满8进1，以数字<strong>0开头</strong>表示</p>
+<p>​    十六进制（hex）：0-9及A-F，满16进1，以<strong>0x或0X开头</strong>表示。A-F不区分大小写</p>
+<p> 不管是几进制，输出后的结果都为十进制</p>
+<p>二进制</p>
+<p>Java整数常量默认是int类型，当用二进制定义整数时，其32位是符号位；当是long类型时，二进制默认占64位，第64位是符合位</p>
+<p>二进制的整数有如下三种形式：</p>
+<p>​    原码：直接将一个数值换成二进制数。最高位是符号位</p>
+<p>​    负数的反码：是对原码按位取反，只是最高位（符号位）确定为1。</p>
+<p>​    负数的补码：其反码+1</p>
+<p><strong>计算机以二进制补码的形式保存所有的整数</strong></p>
+<p>​    <strong>正数的原码、反码、补码都相同</strong></p>
+<p>​    二进制转十进制：如图</p>
+<p><img src="https://img-blog.csdnimg.cn/8a1ab7cfce6f48d1868036b74ce4e9a4.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p> <img src="https://img-blog.csdnimg.cn/5b83b248f31f4026894b8b66e7a2d3ce.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p> 负数的反码与补码计算：如图</p>
+<p><img src="https://img-blog.csdnimg.cn/b687de87ef2b48e68dfdccb526aca117.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p>计算机底层都以补码的形式来存储数据 ！</p>
+<p>补码换算为原码：如图</p>
+<p><img src="https://img-blog.csdnimg.cn/2737ef333c624d99af541f2975c303e6.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p>十进制转换为2进制</p>
+<p>除二取余</p>
+<p> <img src="https://img-blog.csdnimg.cn/c71a81295ed5432db91f5232a47d821d.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动">编辑</p>
+<p> 将十进制数一直除2，并记录下每次得到的余数，直到该数为0</p>
+<p>13 &#x2F; 2 &#x3D; 6 —— 1</p>
+<p> 6 &#x2F; 2 &#x3D; 3 —— 0</p>
+<p> 3 &#x2F; 2 &#x3D; 1 —— 1</p>
+<p> 1 &#x2F; 2 &#x3D; 0 —— 1</p>
+<p>将余数取逆，这里为1101，往前补0</p>
+<p>则该数为（8位二进制）：0000 1101</p>
+<p>二进制转八进制与十六进制</p>
+<p>因有一位二进制只有两种状态，三位二进制就是八种状态，正好每一个八进制数码就需要三位二进制来表示。同理十六进制。</p>
+<p><img src="https://img-blog.csdnimg.cn/b65e3d176ccd4181a9b4046dce8ec968.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+<p> <img src="https://img-blog.csdnimg.cn/a8a2e2bcaa60469bab4b8bf4cd631063.png" alt="img"><img src="data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==" alt="点击并拖拽以移动"></p>
+
+    </article>
+    <!-- license -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://example.com">Alkaid</a>
+            <p>原文链接：<a href="http://example.com/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89/">http://example.com/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89/</a>
+            <p>发表日期：<a href="http://example.com/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89/">September 26th 2022, 9:47:35 pm</a>
+            <p>更新日期：<a href="http://example.com/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89/">September 24th 2022, 1:53:55 am</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%83%EF%BC%89/" title="JAVA基础（七）">
+                    <div class="nextTitle">JAVA基础（七）</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%E5%B0%8F%E7%BB%93%EF%BC%88%E9%A1%B9%E7%9B%AE%E4%B8%89%EF%BC%89/" title="JAVA基础小结（项目三）">
+                    <div class="prevTitle">JAVA基础小结（项目三）</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+            
+                <a href="mailto:980010387@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/wzy9800" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+            
+                <span class="iconfont-archer qq" title=qq>
+                    
+                    <img class="profile-qr" src="/assets/qq.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+            
+        </div>
+    	
+</footer>
+
+        </div>
+        <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JAVA%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1"><span class="toc-number">1.</span> <span class="toc-text">JAVA知识图谱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E8%AF%AD%E8%A8%80%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6%E5%8F%8A%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">Java语言运行机制及运行过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E7%89%88%E6%9C%AC"><span class="toc-number">3.</span> <span class="toc-text">Java版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK%E4%B8%8EJ2SE%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">4.</span> <span class="toc-text">JDK与J2SE的区别</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E4%B8%A4%E7%A7%8D%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6"><span class="toc-number"></span> <span class="toc-text">Java两种核心机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%88JVM%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">Java虚拟机（JVM）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E6%9C%BA%E5%88%B6"><span class="toc-number">2.</span> <span class="toc-text">垃圾收集机制</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JDK%EF%BC%88Java-Development-Kit-Java%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E5%8C%85%EF%BC%89"><span class="toc-number"></span> <span class="toc-text">JDK（Java Development Kit Java开发工具包）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#JRE%EF%BC%88Java-Runtime-Environment-Java%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">JRE（Java Runtime Environment Java运行环境）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK%E3%80%81JRE%E3%80%81JVM%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">2.</span> <span class="toc-text">JDK、JRE、JVM的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%BE%91"><span class="toc-number">3.</span> <span class="toc-text">编辑</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A"><span class="toc-number"></span> <span class="toc-text">注释</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E8%A1%8C%E6%B3%A8%E9%87%8A"><span class="toc-number">0.1.</span> <span class="toc-text">单行注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%A1%A3%E6%B3%A8%E9%87%8A"><span class="toc-number">0.2.</span> <span class="toc-text">文档注释</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#public"><span class="toc-number"></span> <span class="toc-text">public</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#main"><span class="toc-number"></span> <span class="toc-text">main</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.</span> <span class="toc-text">输出语句</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97%E4%B8%8E%E4%BF%9D%E7%95%99%E5%AD%97"><span class="toc-number"></span> <span class="toc-text">关键字与保留字</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%9D%E7%95%99%E5%AD%97"><span class="toc-number">1.</span> <span class="toc-text">保留字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="toc-number">2.</span> <span class="toc-text">标识符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%90%88%E6%B3%95%E6%A0%87%E8%AF%86%E7%AC%A6%E8%A7%84%E5%88%99"><span class="toc-number">2.1.</span> <span class="toc-text">定义合法标识符规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AF%86%E7%AC%A6%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83"><span class="toc-number">2.2.</span> <span class="toc-text">标识符命名规范</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%98%E9%87%8F"><span class="toc-number"></span> <span class="toc-text">变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">0.1.</span> <span class="toc-text">变量的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">0.2.</span> <span class="toc-text">变量的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%8F%98%E9%87%8F%E6%B3%A8%E6%84%8F"><span class="toc-number">0.3.</span> <span class="toc-text">使用变量注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">变量的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%BE%91-1"><span class="toc-number">2.</span> <span class="toc-text">编辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%BE%91-2"><span class="toc-number">3.</span> <span class="toc-text">编辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B4%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">整型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E5%9E%8B"><span class="toc-number"></span> <span class="toc-text">浮点型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number"></span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E5%9E%8B"><span class="toc-number"></span> <span class="toc-text">字符型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8F%98%E9%87%8F%E7%9A%84%E4%B8%89%E7%A7%8D%E8%A1%A8%E7%8E%B0%E5%BD%A2%E5%BC%8F%EF%BC%9A"><span class="toc-number">0.1.</span> <span class="toc-text">字符串变量的三种表现形式：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%86%E8%A7%A3%EF%BC%9AASCII%E7%A0%81"><span class="toc-number"></span> <span class="toc-text">了解：ASCII码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%86%E8%A7%A3%EF%BC%9AUnicode%E7%BC%96%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">了解：Unicode编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%86%E8%A7%A3%EF%BC%9AUTF-8"><span class="toc-number">2.</span> <span class="toc-text">了解：UTF-8</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%83%E5%B0%94%E5%9E%8B"><span class="toc-number"></span> <span class="toc-text">布尔型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number"></span> <span class="toc-text">基本数据类型转换</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number"></span> <span class="toc-text">强制类型转换</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B"><span class="toc-number"></span> <span class="toc-text">字符串类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E5%88%B6"><span class="toc-number"></span> <span class="toc-text">进制</span></a>
+            </div>
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 23
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span>
+            <a class="archive-post-title" href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%8C%EF%BC%89/">JAVA基础（二）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span>
+            <a class="archive-post-title" href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%94%EF%BC%89/">JAVA基础（五）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span>
+            <a class="archive-post-title" href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%85%AB%EF%BC%89/">JAVA基础（八）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span>
+            <a class="archive-post-title" href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%85%AD%EF%BC%89/">JAVA基础（六）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span>
+            <a class="archive-post-title" href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89/">JAVA基础（十一）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span>
+            <a class="archive-post-title" href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%B8%89%EF%BC%89/">JAVA基础（十三）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span>
+            <a class="archive-post-title" href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%E5%B0%8F%E7%BB%93%EF%BC%88%E9%A1%B9%E7%9B%AE%E4%B8%89%EF%BC%89/">JAVA基础小结（项目三）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span>
+            <a class="archive-post-title" href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%83%EF%BC%89/">JAVA基础（七）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span>
+            <a class="archive-post-title" href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89/">JAVA基础（一）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span>
+            <a class="archive-post-title" href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B9%9D%EF%BC%89/">JAVA基础（九）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span>
+            <a class="archive-post-title" href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%89%EF%BC%89/">JAVA基础（三）</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89/">JAVA基础（十二）</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89/">JAVA基础（十四）</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%EF%BC%89/">JAVA基础（十）</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%9B%9B%EF%BC%89/">JAVA基础（四）</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/26/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%B8%83%EF%BC%89/">Java高级（七）</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/26/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%B8%80%EF%BC%89/">JAVA高级（一）</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/26/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%B8%89%EF%BC%89/">JAVA高级（三）</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/26/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%BA%8C%EF%BC%89/">JAVA高级（二）</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/26/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%BA%94%EF%BC%89/">JAVA高级（五）</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/26/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E5%9B%9B%EF%BC%89/">JAVA高级（四）</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/26</span>
+            <a class="archive-post-title" href="/2022/09/26/hello-world/">基础配置</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> Invalid date </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span>
+            <a class="archive-post-title" href="/2022/09/26/Java%E9%AB%98%E7%BA%A7%EF%BC%88%E5%85%AD%EF%BC%89/">JAVA高级（六）</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="JAVA">
+            <span class="iconfont-archer">&#xe60a;</span>
+            JAVA
+        </span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "http://example.com",
+        root: siteMetaRoot,
+        author: "Alkaid"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v=20211217"></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v=20211217"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20211217" async></script>
+        
+        <!-- mermaid -->
+        
+    </body>
+</html>

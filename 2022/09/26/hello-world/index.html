@@ -19,18 +19,22 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Blog">
-<meta property="og:url" content="http://example.com/archives/2022/page/3/index.html">
+    <meta name="description" content="Run server1$ hexo s  Generate static files1$ hexo g  Deploy to remote sites1$ hexo d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基础配置">
+<meta property="og:url" content="http://example.com/2022/09/26/hello-world/index.html">
 <meta property="og:site_name" content="Blog">
+<meta property="og:description" content="Run server1$ hexo s  Generate static files1$ hexo g  Deploy to remote sites1$ hexo d">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-26T13:47:35.579Z">
+<meta property="article:modified_time" content="2022-09-17T09:43:37.542Z">
 <meta property="article:author" content="Alkaid">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
     
-    <title>Alkaid&#39;s Studio</title>
+    <title>基础配置 · Alkaid&#39;s Studio</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -217,6 +221,8 @@
         }
     </script>
     
+        <body class="post-body">
+    
         <!-- header -->
         <header class="header header-mobile">
     <!-- top read progress line -->
@@ -246,6 +252,17 @@
     </div>
     <!-- toggle banner for post layout -->
     
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">Alkaid&#39;s Studio.</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">基础配置</a>
+            </div>
+        </div>
+    
 </header>
 
         <!-- fixed footer -->
@@ -272,24 +289,71 @@
 
 
 
+    height:50vh;
+
 ">
     
     <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+                基础配置
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+                
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">15</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2022/09/26</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -419,121 +483,70 @@
 
             <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
             <div class="container container-unloaded">
-                <main class="main index-page">
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89/">
-                
-                <span class="abstract-title-text">JAVA基础（一）</span>
-            </a>
-            <div class="abstract-content">
-                JAVA知识图谱
-Java语言运行机制及运行过程Java语言的特点：跨平台性
+                <main class="main post-page">
+    <article class="article-entry">
+        <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
 
-因为有了JVM，同一个Java程序在三个不同的操作系统中都可以执行。这样就实现了Java程序的跨平台性
-Java版本
-JDK与J2SE的区别 JAVA就是指JDK开发工具，所以我们可以理解为JAVA等价于JDK。JAVA有3个版本：J2SE J2EE J2ME，而J2SE桌面级应用，J2ME移动端应用，J2EE企业级应用
-Java两种核心机制Java虚拟机（JVM）​        JVM是一个虚拟的计算机，具有指令集并使用不同的存储区域。负责执行指令，管理数 据、内存、寄存器。         
-​    ...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/09/24">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/26</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%E5%B0%8F%E7%BB%93%EF%BC%88%E9%A1%B9%E7%9B%AE%E4%B8%89%EF%BC%89/">
-                
-                <span class="abstract-title-text">JAVA基础小结（项目三）</span>
-            </a>
-            <div class="abstract-content">
-                 •模拟实现一个基于文本界面的《开发团队调度软件》
-•熟悉Java面向对象的高级特性，进一步掌握编程技巧和调试技巧
-•主要涉及以下知识点：
-Ø类的继承性和多态性
-Ø对象的值传递、接口
-Østatic和final修饰符
-Ø特殊类的使用：包装类、抽象类、内部类
-Ø异常处理
-•该软件实现以下功能：
-Ø软件启动时，根据给定的数据创建公司部分成员列表（数组）
-Ø根据菜单提示，基于现有的公司成员，组建一个开发团队以开发一个新的项目
-Ø组建过程包括将成员插入到团队中，或从团队中删除某成员，还可以列出团队中现有成员的列表
-Ø开发团队成员包括架构师、设计师和程序员
- 需求说明
- 本软件采用单级菜单方式工作...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/09/24">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/26</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/26/hello-world/">
-                
-                <span class="abstract-title-text">基础配置</span>
-            </a>
-            <div class="abstract-content">
-                Run server1$ hexo s
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g</span><br></pre></td></tr></table></figure>
 
-Generate static files1$ hexo g
-
-Deploy to remote sites1$ hexo d
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
 
 
-            </div>
-            <!-- read more -->
+    </article>
+    <!-- license -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://example.com">Alkaid</a>
+            <p>原文链接：<a href="http://example.com/2022/09/26/hello-world/">http://example.com/2022/09/26/hello-world/</a>
+            <p>发表日期：<a href="http://example.com/2022/09/26/hello-world/">September 26th 2022, 9:47:35 pm</a>
+            <p>更新日期：<a href="http://example.com/2022/09/26/hello-world/">September 17th 2022, 5:43:37 pm</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
             
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/09/17">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/26</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%E5%B0%8F%E7%BB%93%EF%BC%88%E9%A1%B9%E7%9B%AE%E4%B8%89%EF%BC%89/" title="JAVA基础小结（项目三）">
+                    <div class="nextTitle">JAVA基础小结（项目三）</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+        </li>
+    </ul>
+    <!-- comment -->
     
-    <!-- paginator  -->
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
     
-        <nav class="page-nav">
-            <a class="extend prev" rel="prev" href="/archives/2022/page/2/">&lt; PREV</a><a class="page-number" href="/archives/2022/">1</a><a class="page-number" href="/archives/2022/page/2/">2</a><span class="page-number current">3</span>
-        </nav>
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
     
 </main>
 
@@ -624,6 +637,23 @@ Deploy to remote sites1$ hexo d
 
         </div>
         <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">2.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">3.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol>
+            </div>
         
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">
@@ -1214,6 +1244,8 @@ Deploy to remote sites1$ hexo d
         <!-- CNZZ -->
         
         <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20211217" async></script>
         
         <!-- mermaid -->
         

@@ -19,18 +19,24 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Blog">
-<meta property="og:url" content="http://example.com/archives/2022/09/index.html">
+    <meta name="description" content="HTML超文本标记语言,定义了网页内容的含义和结构 开始标签（Opening tag）：包含元素的名称（本例为 p），被大于号、小于号所包围。表示元素从这里开始或者开始起作用 —— 在本例中即段落由此开始。结束标签（Closing tag）：与开始标签相似，只是其在元素名之前包含了一个斜杠。这表示着元素的结尾 —— 在本例中即段落在此结束。初学者常常会犯忘记包含结束标签的错误，这可能会产生一些奇怪">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端学习笔记（一）HTML基础">
+<meta property="og:url" content="http://example.com/2022/12/10/HTML%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="Blog">
+<meta property="og:description" content="HTML超文本标记语言,定义了网页内容的含义和结构 开始标签（Opening tag）：包含元素的名称（本例为 p），被大于号、小于号所包围。表示元素从这里开始或者开始起作用 —— 在本例中即段落由此开始。结束标签（Closing tag）：与开始标签相似，只是其在元素名之前包含了一个斜杠。这表示着元素的结尾 —— 在本例中即段落在此结束。初学者常常会犯忘记包含结束标签的错误，这可能会产生一些奇怪">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2022/12/10/HTML%E5%9F%BA%E7%A1%80/images/firefox-icon.png">
+<meta property="article:published_time" content="2022-12-10T05:05:27.329Z">
+<meta property="article:modified_time" content="2022-12-10T05:15:30.742Z">
 <meta property="article:author" content="Alkaid">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/12/10/HTML%E5%9F%BA%E7%A1%80/images/firefox-icon.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
     
-    <title>Alkaid&#39;s Studio</title>
+    <title>前端学习笔记（一）HTML基础 · Alkaid&#39;s Studio</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -217,6 +223,8 @@
         }
     </script>
     
+        <body class="post-body">
+    
         <!-- header -->
         <header class="header header-mobile">
     <!-- top read progress line -->
@@ -246,6 +254,17 @@
     </div>
     <!-- toggle banner for post layout -->
     
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">Alkaid&#39;s Studio.</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">前端学习笔记（一）HTML基础</a>
+            </div>
+        </div>
+    
 </header>
 
         <!-- fixed footer -->
@@ -272,24 +291,71 @@
 
 
 
+    height:50vh;
+
 ">
     
     <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+                前端学习笔记（一）HTML基础
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+                
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">1.6k</span>阅读时长: <span class="post-count reading-time">5 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2022/12/10</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -419,361 +485,208 @@
 
             <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
             <div class="container container-unloaded">
-                <main class="main index-page">
+                <main class="main post-page">
+    <article class="article-entry">
+        <p>HTML<br>超文本标记语言,定义了网页内容的含义和结构</p>
+<p>开始标签（Opening tag）：包含元素的名称（本例为 p），被大于号、小于号所包围。表示元素从这里开始或者开始起作用 —— 在本例中即段落由此开始。<br>结束标签（Closing tag）：与开始标签相似，只是其在元素名之前包含了一个斜杠。这表示着元素的结尾 —— 在本例中即段落在此结束。初学者常常会犯忘记包含结束标签的错误，这可能会产生一些奇怪的结果。<br>内容（Content）：元素的内容，本例中就是所输入的文本本身。<br>元素（Element）：开始标签、结束标签与内容相结合，便是一个完整的元素。<br>元素也可以有属性，属性包含了关于元素的一些额外信息，这些信息本身不应显现在内容中。</p>
+<p>属性应该包含：</p>
+<p>在属性与元素名称（或上一个属性，如果有超过一个属性的话）之间的空格符。<br>属性的名称，并接上一个等号。<br>由引号所包围的属性值。<br>可以将一个元素置于其他元素之中 —— 称作嵌套</p>
+<p>空元素<br>不包含任何内容的元素称为空元素。比如img元素</p>
+<p>HTML 文档详解<br>• <!DOCTYPE html> — 文档类型。</p>
+<p>• <html></html> —  <html>元素。该元素包含整个页面的内容，也称作根元素。</html></p>
+<p>• <head></head> —  <head>元素。该元素的内容对用户不可见，其中包含例如面向搜索引擎的搜索关键字、页面描述、CSS 样式表和字符编码声明等。</head></p>
+<p>• <meta charset="utf-8"> — 该元素指定文档使用 UTF-8 字符编码</p>
+<p>• <title></title> —  <title>元素。该元素设置页面的标题，显示在浏览器标签页上，也作为收藏网页的描述文字。</title></p>
+<p>• <body></body> —  <body>元素。该元素包含期望让用户在访问页面时看到的内容，包括文本、图像、视频、游戏、可播放的音轨或其他内容。</body></p>
+<p>img<br><img src="images/firefox-icon.png" alt="测试图片"><br>该元素通过包含图像文件路径的地址属性 src ，还包括一个替换文字属性 alt，是图像的描述内容，用于当图像不能被用户看见时显示</p>
+<p>其中src是必须属性</p>
+<p>src                图片路径        </p>
+<p>alt                 文本                        图像不能被用户看见时显示</p>
+<p>title               文本                        鼠标放到图片上时显示的文字</p>
+<p>width            像素                                        宽</p>
+<p>height           像素                                        高</p>
+<p>border          像素                                       边框 </p>
+<p>标题<br>标题元素可用于指定内容的标题和子标题。就像一本书的书名、每章的大标题、小标题，等。HTML 文档也是一样。HTML 包括六个级别的标题。h1到h6</p>
+<h1>主标题</h1>
+<h2>顶层标题</h2>
+<h3>子标题</h3>
+<h4>次子标题</h4>
+段落
+<p>元素是用来指定段落的 
+
+</p><p>这是一个段落</p>
+列表
+ 最常用的列表类型为：
+
+<p>无序列表中项目的顺序并不重要，就像购物列表。用一个 <ul>元素包围。<br>有序列表中项目的顺序很重要，就像烹调指南。用一个 <ol> 元素包围。<br>自定义列表<br>    <dl><br>        <dt><br>            <dd></dd><br>        </dt><br>    </dl><br>列表的每个项目用一个列表项目（List Item）元素 <li> 包围。 </li></ol></ul></p>
+<p>链接<br>使用<a>将文本包含在元素内</a></p>
+<p><a href="xxx">xxx</a><br>href                        目标链接 </p>
+<pre><code>    1.外部链接
+
+     如http://www.csdn.com
+
+    2.内部链接
+
+    C:\Drivers
+
+    或是相对路径
+
+    3.空链接
+
+    #
+
+    4.下载链接
+
+    如果链接是exe或rar，会自动下载
+
+    5.网页元素单链接
+
+    即点开图像、视频打开网页
+
+    6.锚点链接
+</code></pre>
+<p>​        </p>
+<pre><code>            &lt;a href=&quot;#1&quot;&gt;&lt;/a&gt;
+
+            &lt;h1 id=&quot;1&quot;&gt; &lt;/h1&gt;
+
+    点击不会跳转到网页，而是定位到id所在的地方。
+
+    #后面的值自定义
+</code></pre>
+<p>target                     打开方式       </p>
+<pre><code>    -self从自身打开 
+
+    -blank新标签页打开 
+</code></pre>
+<p>文本格式化标签<br><strong></strong>或<b></b>                加粗</p>
+<p><em></em>或<i></i>                             倾斜</p>
+<p><del></del>或<s></s>                           删除线</p>
+<p><ins></ins>或<u></u>                           下划线</p>
+<p>布局用标签</p>
+<div></div>
+
+<p><span></span></p>
+<p><br>换行</p>
+<hr>                水平线
+
+<p>表格标签</p>
+<table>
+    <tr>
+        <td></td>
+    </tr>
+</table>
+<table>定义表格
+
+<p>  属性：</p>
+<pre><code>    align        left ，right ，center        对齐方式
+
+    border                1，&quot;&quot;                        边框
+
+    width                像素                             宽
+
+    height               像素                            高   
+</code></pre>
+<p>​        </p>
+<tr>定义表格中的行
+
+<td>定义表格中的单元格
+
+<th>加粗居中的单元格
+
+<p> 表格结构标签<br>作用：让表格更有语义</p>
+<thead></thead>              头部
+
+<tbody></tbody>              身体
+
+<p> 合并单元格<br>跨行合并        rowspan（往上合并）</p>
+<p>跨列合并        colspan （往左合并） </p>
+<p>表单标签<br> 表单由表单域、表单控件（表单元素）和提示信息组成</p>
+<p>表单域<br>一个包含表单元素的区域，将信息提交到服务器</p>
+<pre><code>&lt;form&gt;
+ 
+&lt;/form&gt;
+</code></pre>
+<p>常用属性：<br>action                url                服务器地址</p>
+<p>method            get&#x2F;post        请求方式</p>
+<p>name                名称</p>
+<p>表单元素<br>表单输入元素input<br><input type><br>常用属性<br>type        input的工作方式相当程度上取决于type属性的值，不同的 type 值会在各自的参考页中                   进行介绍。如果未指定此属性，则采用的默认类型为 text。</p>
+<p>value	所有	表单控件的值。以名字&#x2F;值对的形式随表单一起提交<br>name	所有	input 表单控件的名字。以名字&#x2F;值对的形式随表单一起提交<br>checked	radio, checkbox	用于控制控件是否被选中<br>maxlength	password, search, tel, text, url	value 的最大长度（最多字符数目）<br>常用属性值：<br>text                                文本框</p>
+<p>password                        密码</p>
+<p>radio                              单选框</p>
+<p>checkbox                       多选框 </p>
+<p>button                               按钮</p>
+<p>submit                           提交按钮</p>
+<p>reset                                 重置</p>
+<p>file                                 上传文件</p>
+<p><label> 元素（标签）表示用户界面中某个元素的说明</label></p>
+<p>将一个 <label> 和一个 <input> 元素相关联主要有这些优点：</label></p>
+<p>标签文本不仅与其相应的文本输入元素在视觉上相关联，程序中也是如此。 这意味着，当用户聚焦到这个表单输入元素时，屏幕阅读器可以读出标签，让使用辅助技术的用户更容易理解应输入什么数据。</p>
+<p>你可以点击关联的标签来聚焦或者激活这个输入元素，就像直接点击输入元素一样。这扩大了元素的可点击区域，让包括使用触屏设备在内的用户更容易激活这个元素。</p>
+<textarea> 元素表示一个多行纯文本编辑控件，当你希望用户输入一段相当长的、不限格式的文本，例如评论或反馈表单中的一段意见时，这很有用。
+————————————————
+版权声明：本文为CSDN博主「摇光·」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/m0_56413004/article/details/125014048</textarea></th></td></tr></table>
+    </article>
+    <!-- license -->
     
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/26/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%B8%83%EF%BC%89/">
-                
-                <span class="abstract-title-text">Java高级（七）</span>
-            </a>
-            <div class="abstract-content">
-                File类的使用java.io.File类：文件和文件目录路径的抽象表示形式，与平台无关
-常用构造器public File(String pathname)
-​    以pathname为路径创建File对象，可以是绝对路径或者相对路径，如果 pathname是相对路径，则默认的当前路径在系统属性user.dir中存储。
-​          绝对路径：是一个固定的路径,从盘符开始
-​          相对路径：是相对于某个位置开始
-public File(String parent,String child)
-​    以parent为父路径，child为子路径创建File对象。...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/09/26">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/26</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://example.com">Alkaid</a>
+            <p>原文链接：<a href="http://example.com/2022/12/10/HTML%E5%9F%BA%E7%A1%80/">http://example.com/2022/12/10/HTML%E5%9F%BA%E7%A1%80/</a>
+            <p>发表日期：<a href="http://example.com/2022/12/10/HTML%E5%9F%BA%E7%A1%80/">十二月 10日 2022, 1:05:27 下午</a>
+            <p>更新日期：<a href="http://example.com/2022/12/10/HTML%E5%9F%BA%E7%A1%80/">December 10th 2022, 1:15:30 pm</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
     
-        
-        
-        
-        
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
             
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/26/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E5%9B%9B%EF%BC%89/">
-                
-                <span class="abstract-title-text">JAVA高级（四）</span>
-            </a>
-            <div class="abstract-content">
-                枚举类的使用主要内容:
-​    如何自定义枚举类
-​    如何使用关键字enum定义枚举类
-​    Enum类的主要方法
-​    实现接口的枚举类
-使用1.枚举类的理解：类的对象只有有限个，确定的。
-2.当需要定义一组常量时，强烈建议使用枚举类
-举例
-​    星期：Monday(星期一)、……、Sunday(星期天)
-​    性别：Man(男)、Woman(女)
-3.如果枚举类中只有一个对象，则可以作为单例模式的实现方式
-定义方式一：JDK5.0之前，自定义枚举类
-12345678910111213141516171819202122232425262728293031323...
-            </div>
-            <!-- read more -->
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2022/12/10/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89CSS%EF%BC%88%E9%80%89%E6%8B%A9%E5%99%A8%E3%80%81%E6%96%87%E6%9C%AC%E5%B1%9E%E6%80%A7%E3%80%81%E6%98%BE%E7%A4%BA%E6%A8%A1%E5%BC%8F%EF%BC%89/" title="前端学习笔记（二）CSS（选择器、文本属性、显示模式）">
+                    <div class="nextTitle">前端学习笔记（二）CSS（选择器、文本属性、显示模式）</div>
+                </a>
             
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/09/24">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/26</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2022/09/26/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%B8%83%EF%BC%89/" title="Java高级（七）">
+                    <div class="prevTitle">Java高级（七）</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
     
-        
-        
-        
-        
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
             
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/26/Java%E9%AB%98%E7%BA%A7%EF%BC%88%E5%85%AD%EF%BC%89/">
-                
-                <span class="abstract-title-text">JAVA高级（六）</span>
-            </a>
-            <div class="abstract-content">
-                为什么要有泛型泛型的设计背景集合容器类在设计阶段&#x2F;声明阶段不能确定这个容器到底实际存的是什么类型的 对象，所以在JDK1.5之前只能把元素类型设计为Object，JDK1.5之后使用泛型来 解决。因为这个时候除了元素的类型不确定，其他的部分是确定的，例如关于 这个元素如何保存，如何管理等是确定的，因此此时把元素的类型设计成一个 参数，这个类型参数叫做泛型。Collection，List，ArrayList 这个就 是类型参数，即泛型。
-概念所谓泛型，就是允许在定义类、接口时通过一个标识表示类中某个属性的类 型或者是某个方法的返回值及参数类型。这个类型参数将在使用时（例如， 继承...
-            </div>
-            <!-- read more -->
+
             
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/09/24">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/26</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
     
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/26/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%BA%94%EF%BC%89/">
-                
-                <span class="abstract-title-text">JAVA高级（五）</span>
-            </a>
-            <div class="abstract-content">
-                Java集合Java集合框架概述一方面， 面向对象语言对事物的体现都是以对象的形式，为了方便对多个对象的操作，就要对对象进行存储。另一方面，使用Array存储对象方面具有一些弊端，而Java集合就像一种容器，可以动态地把多个对象的引用放入容器中。
-1.集合、数组都是对多个数据进行存储操作的结构，简称Java容器
-​    说明：此时的存储，主要指的是内存层面的存储，不涉及到持久化的存储（.txt、.jpg、.avi、数据库中）
-2.1数组在存储多个数据方面的特点：
-​    &gt; 一旦初始化以后，其长度就确定了。
-​    &gt; 数组一旦定义好，其元素的类型也就确定了。我们也就只...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/09/24">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/26</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
     
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/26/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%BA%8C%EF%BC%89/">
-                
-                <span class="abstract-title-text">JAVA高级（二）</span>
-            </a>
-            <div class="abstract-content">
-                 String类：代表字符串。Java 程序中的所有字符串字面值（如 “abc” ）都作 为此类的实例实现。
-String是一个final类，代表不可变的字符序列。
-字符串是常量，用双引号引起来表示。它们的值在创建之后不能更改。
-String对象的字符内容是存储在一个字符数组value[]中的。
-1.String声明为final的，不可被继承。
-2.String实现了Serialzable接口：表示字符串是支持序列化的。
-​     实现了Compareble接口：表示String可以比较大小。
-3.String内部定义了final char[] value用于存储字符串数据
-4.Str...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/09/24">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/26</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/26/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%B8%89%EF%BC%89/">
-                
-                <span class="abstract-title-text">JAVA高级（三）</span>
-            </a>
-            <div class="abstract-content">
-                JDK8之前日期时间APIjava.lang.System类System类提供的public static long currentTimeMillis()用来返回当前时 间与1970年1月1日0时0分0秒之间以毫秒为单位的时间差。
-​    此方法适于计算时间差。
-java.util.Date类​        |—–java.sql.Date类
-​    java.util.Date类
-两个构造器的使用：
-​    Date（）：创建一个对应当前时间的Date对象
-​    创建指定毫秒数的Date对象
-两个方法的使用：
-​    toString():显示当前的年、月、日、时、分、...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/09/24">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/26</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/26/JAVA%E9%AB%98%E7%BA%A7%EF%BC%88%E4%B8%80%EF%BC%89/">
-                
-                <span class="abstract-title-text">JAVA高级（一）</span>
-            </a>
-            <div class="abstract-content">
-                IDEA的使用创建模块（Module）在Eclipse中又WorkSpace和Project，在IDEA中只有Project和Module，对应关系为
-​    Eclipse中的WorkSpace    对应    IDEA中的Project
-​    Eclipse中的Project        对应    IDEA中的Module
-相关配置设置主题
-编辑
- 编辑
-这里默认提供了四套主题：IntelliJ，Darcula，Windows等。这里可以根据自己的喜好进行选择。
-设置窗体及菜单的字体及字体大小 (可忽略)编辑
-设置编辑区主题 (可忽略)编辑
- 也可自行下载或通过插件更换主...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/09/24">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/26</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%9B%9B%EF%BC%89/">
-                
-                <span class="abstract-title-text">JAVA基础（四）</span>
-            </a>
-            <div class="abstract-content">
-                Eclipse使用workspace编辑
-存放代码的目录
-若不小心勾选或想删除不要的workspace
-工具栏Windows——Preferences——General——Start and Shutdown——workspace
-勾选即可在打开时再次选择workspace 
-编辑
-图中为透视图：
-编辑
- 点击更改透视图为javaee，若没有可自行百度解决
- 编辑
-点击搜索 
- 编辑
- 点击Package Explorer（Java）添加，并拖入左侧 
-编辑
-之后以相同的方式添加navigator，Console
-编辑
-编辑
- 若不小心删掉某项也可以按此方法添加
-该项基本用不上，可以叉掉...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/09/24">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/26</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%EF%BC%89/">
-                
-                <span class="abstract-title-text">JAVA基础（十）</span>
-            </a>
-            <div class="abstract-content">
-                练习
-\2. (1)定义一个ManKind类，包括
-​    成员变量int sex和int salary；
-​    方法void manOrWoman()：根据sex的值显示“man”(sex&#x3D;&#x3D;1)或者“woman”(sex&#x3D;&#x3D;0)；
-​    方法void employeed()：根据salary的值显示“no job”(salary&#x3D;&#x3D;0)或者“ job”(salary!&#x3D;0)。
-​     (2)定义类Kids继承ManKind，并包括
-​         成员变量int yearsOld；
-​      ...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/09/24">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/26</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2022/09/26/JAVA%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89/">
-                
-                <span class="abstract-title-text">JAVA基础（十四）</span>
-            </a>
-            <div class="abstract-content">
-                异常概述与异常体系结构在使用计算机语言进行项目开发的过程中，即使程序员把代码写得尽善尽美， 在系统的运行过程中仍然会遇到一些问题，因为很多问题不是靠代码能够避 免的，比如：客户输入数据的格式，读取文件是否存在，网络是否始终保持通畅等等。
-异常：在Java语言中，将程序执行中发生的不正常情况称为“异常” 。 (开发过程中的语法错误和逻辑错误不是异常)
-Java程序在执行过程中所发生的异常事件可分为两类
-​    Error：Java虚拟机无法解决的严重问题。如：JVM系统内部错误、资源耗尽等严重情况。比如：StackOverflowError和OOM。一般不编写针对性的代码进行处理。
-12...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/09/24">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/09/26</span>
-                </div>
-                <!-- tags -->
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-    <!-- paginator  -->
-    
-        <nav class="page-nav">
-            <span class="page-number current">1</span><a class="page-number" href="/archives/2022/09/page/2/">2</a><a class="page-number" href="/archives/2022/09/page/3/">3</a><a class="extend next" rel="next" href="/archives/2022/09/page/2/">NEXT &gt;</a>
-        </nav>
+    <!-- Mathjax -->
     
 </main>
 
@@ -864,6 +777,23 @@ Java程序在执行过程中所发生的异常事件可分为两类
 
         </div>
         <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">主标题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">顶层标题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.1.</span> <span class="toc-text">子标题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">次子标题</span></a></li></ol></li></ol></li></ol></li></ol>
+            </div>
         
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">
@@ -1522,6 +1452,8 @@ Java程序在执行过程中所发生的异常事件可分为两类
         <!-- CNZZ -->
         
         <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20211217" async></script>
         
         <!-- mermaid -->
         
